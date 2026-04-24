@@ -981,35 +981,14 @@ footer {
   }
 }
 
-/* ── FIX HERO TEXT VISIBILITY ON MOBILE ── */
-@media (max-width: 900px) {
-  .hero-bg::after {
-    background: rgba(0,0,0,0.3) !important; /* lighten overlay */
-  }
-
-  .hero-content {
-    color: #ffffff !important;
-    text-align: center;
-  }
-
-  .hero h1 {
-    color: #ffffff !important;
-  }
-
-  .hero-sub {
-    color: rgba(255,255,255,0.9) !important;
-  }
-
-  .hero-eyebrow {
-    color: #d4af6a !important;
-  }
-
-  .hero-ctas a {
-    opacity: 1 !important;
-  }
-}
-
-.hero-content {
-  position: relative;
-  z-index: 5;
+body::before {
+  content: "CSS UPDATED";
+  position: fixed;
+  top: 120px;
+  left: 20px;
+  background: red;
+  color: white;
+  padding: 10px;
+  z-index: 99999;
+  font-size: 20px;
 }
