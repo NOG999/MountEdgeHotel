@@ -949,46 +949,8 @@ footer {
   .newsletter-form { flex-direction: column; }
 }
 
-/* ── FINAL MOBILE HOME FIX ── */
-@media (max-width: 900px) {
-  nav {
-    background: rgba(245,240,232,0.96);
-  }
-
-  .hamburger span {
-    background: var(--dark) !important;
-  }
-
-  .hero {
-    margin-top: 0 !important;
-    padding-top: 90px !important;
-    min-height: 100vh !important;
-    height: auto !important;
-  }
-
-  .hero-bg {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  .hero-content {
-    display: block !important;
-    color: white !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    z-index: 10 !important;
-  }
+/* Hide mobile hamburger menu */
+.hamburger {
+  display: none !important;
 }
-
-body::before {
-  content: "CSS UPDATED";
-  position: fixed;
-  top: 120px;
-  left: 20px;
-  background: red;
-  color: white;
-  padding: 10px;
-  z-index: 99999;
-  font-size: 20px;
 }
