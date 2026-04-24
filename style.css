@@ -949,23 +949,34 @@ footer {
   .newsletter-form { flex-direction: column; }
 }
 
-/* ── MOBILE INDEX FIX ── */
+/* ── FINAL MOBILE HOME FIX ── */
 @media (max-width: 900px) {
+  nav {
+    background: rgba(245,240,232,0.96);
+  }
+
+  .hamburger span {
+    background: var(--dark) !important;
+  }
+
   .hero {
-    height: auto;
-    min-height: 100vh;
-    padding-top: 120px;
+    margin-top: 0 !important;
+    padding-top: 90px !important;
+    min-height: 100vh !important;
+    height: auto !important;
+  }
+
+  .hero-bg {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .hero-content {
-    padding-top: 2rem;
+    display: block !important;
+    color: white !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 10 !important;
   }
-}
-
-.hero {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  visibility: visible !important;
-  opacity: 1 !important;
 }
