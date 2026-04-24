@@ -980,3 +980,36 @@ footer {
     z-index: 10 !important;
   }
 }
+
+/* ── FIX HERO TEXT VISIBILITY ON MOBILE ── */
+@media (max-width: 900px) {
+  .hero-bg::after {
+    background: rgba(0,0,0,0.3) !important; /* lighten overlay */
+  }
+
+  .hero-content {
+    color: #ffffff !important;
+    text-align: center;
+  }
+
+  .hero h1 {
+    color: #ffffff !important;
+  }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.9) !important;
+  }
+
+  .hero-eyebrow {
+    color: #d4af6a !important;
+  }
+
+  .hero-ctas a {
+    opacity: 1 !important;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+}
