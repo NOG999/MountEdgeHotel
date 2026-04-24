@@ -54,7 +54,7 @@ function calcBooking() {
   const rates = {
     'Single': { 'Room Only': 12000, 'Half Board': 15000, 'Full Board': 18000 },
     'Double': { 'Room Only': 15500, 'Half Board': 18500, 'Full Board': 24500 },
-    'Triple': { 'Room Only': 18000, 'Half Board': 22500, 'Full Board': 24500 },
+    'Triple': { 'Room Only': 18000, 'Half Board': 22500, 'Full Board': 26500 },
   };
 
   let nights = 1;
