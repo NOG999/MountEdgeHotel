@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mount Edge Hotel | Nuwara Eliya, Sri Lanka</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- NOTICE BANNER -->
+<div class="notice-banner">
+  ✦ Special Offer: <strong>15% off</strong> for bookings in April &amp; May! Use code: <strong>HILLSIDE15</strong>
+  <button class="notice-close">×</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Mount Edge Hotel</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="rooms.html">Rooms</a></li>
+    <li><a href="facilities.html">Facilities</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="booking.html" class="nav-book">Book Now</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu">
+  <button class="mobile-close">×</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="rooms.html">Rooms</a></li>
+    <li><a href="facilities.html">Facilities</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="booking.html">Book Now</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Nuwara Eliya · Sri Lanka</p>
+    <h1>Mount Edge Hotel</h1>
+    <p class="hero-sub">Your peaceful retreat in the mist-draped hills of Sri Lanka's Little England.</p>
+    <div class="hero-ctas">
+      <a href="booking.html" class="btn btn-gold">Book Your Stay</a>
+      <a href="rooms.html" class="btn btn-outline">View Rooms</a>
+    </div>
+  </div>
+</section>
+
+<!-- AVAILABILITY BAR -->
+<div class="availability-bar">
+  <form class="avail-form" onsubmit="return false;">
+    <div class="avail-group">
+      <label for="checkin">Check-in</label>
+      <input type="date" id="checkin" />
+    </div>
+    <div class="avail-group">
+      <label for="checkout">Check-out</label>
+      <input type="date" id="checkout" />
+    </div>
+    <div class="avail-group">
+      <label for="roomtype">Room Type</label>
+      <select id="roomtype">
+        <option value="">Any Type</option>
+        <option>Single</option>
+        <option>Double</option>
+        <option>Triple</option>
+      </select>
+    </div>
+    <div class="avail-group">
+      <label for="guests">Guests</label>
+      <select id="guests">
+        <option>1 Guest</option>
+        <option>2 Guests</option>
+        <option>3 Guests</option>
+        <option>4 Guests</option>
+        <option>5+ Guests</option>
+      </select>
+    </div>
+    <div class="avail-group" style="flex:0;">
+      <label>&nbsp;</label>
+      <button type="submit" class="btn btn-green" style="white-space:nowrap;">Check Availability</button>
+    </div>
+  </form>
+</div>
+
+<!-- WELCOME -->
+<section style="background: var(--cream);">
+  <div class="welcome-split">
+    <div class="welcome-img-wrap">
+      <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="Mount Edge Hotel exterior" loading="lazy" />
+      <div class="welcome-badge">
+        <span class="big">20+</span>
+        <span class="small">Years of Hospitality</span>
+      </div>
+    </div>
+    <div>
+      <span class="section-label">Welcome</span>
+      <h2 class="section-title">A Tranquil Escape in <em>Sri Lanka's</em> Hill Country</h2>
+      <div class="section-line"></div>
+      <p>Nestled in the heart of Nuwara Eliya, Mount Edge Hotel offers a serene haven for travelers seeking the beauty of Sri Lanka's central highlands. Surrounded by lush tea plantations, misty mountains, and cool refreshing air, our hotel provides the perfect base for exploring the wonders of the hill country.</p>
+      <p style="margin-top:1rem;">Whether you're a couple on a romantic getaway, a family on holiday, or a solo traveler seeking peace, we welcome you with comfortable rooms, friendly service, and an unforgettable atmosphere.</p>
+      <div class="welcome-features">
+        <div class="feat-item"><span class="feat-icon">⛰️</span><div><h4>Mountain Views</h4><p>Wake up to breathtaking misty mountain scenery every morning.</p></div></div>
+        <div class="feat-item"><span class="feat-icon">♡</span><div><h4>Family Friendly</h4><p>Spacious rooms and a safe garden for families with children.</p></div></div>
+        <div class="feat-item"><span class="feat-icon">★</span><div><h4>Warm Hospitality</h4><p>Genuine Sri Lankan warmth from our dedicated family team.</p></div></div>
+        <div class="feat-item"><span class="feat-icon">🍃</span><div><h4>Tea Country</h4><p>Surrounded by world-renowned Ceylon tea estates.</p></div></div>
+      </div>
+      <div style="margin-top:2.5rem;">
+        <a href="about.html" class="btn btn-dark">Learn More About Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOMS PREVIEW -->
+<section style="background: var(--mist);">
+  <div class="container text-center">
+    <span class="section-label">Accommodation</span>
+    <h2 class="section-title">Our <em>Rooms</em></h2>
+    <div class="section-line"></div>
+    <p style="max-width:560px; margin: 0 auto 3rem;">Choose from our comfortable Single, Double, and Triple rooms — each designed for a restful stay in the hills.</p>
+    <div class="rooms-grid">
+      <div class="room-card">
+        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="Single Room" loading="lazy" />
+        <div class="room-card-body">
+          <h3>Single Room</h3>
+          <p>Ideal for solo travelers seeking a cozy and peaceful retreat with all essential comforts.</p>
+          <div class="room-price">
+            <span class="price-from">From</span>
+            <span class="price-amount">Rs. 12,000</span>
+            <span class="price-per">/ night</span>
+          </div>
+          <div class="room-amenities">
+            <span class="amenity-tag">Free Wi-Fi</span>
+            <span class="amenity-tag">Hot Water</span>
+            <span class="amenity-tag">Mountain View</span>
+          </div>
+          <a href="booking.html?type=Single" class="btn btn-gold">Book Single</a>
+        </div>
+      </div>
+      <div class="room-card">
+        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80" alt="Double Room" loading="lazy" />
+        <div class="room-card-body">
+          <h3>Double Room</h3>
+          <p>Perfect for couples looking for a romantic hill country escape with beautiful views.</p>
+          <div class="room-price">
+            <span class="price-from">From</span>
+            <span class="price-amount">Rs. 15,500</span>
+            <span class="price-per">/ night</span>
+          </div>
+          <div class="room-amenities">
+            <span class="amenity-tag">Free Wi-Fi</span>
+            <span class="amenity-tag">Hot Water</span>
+            <span class="amenity-tag">Tea Plantation View</span>
+          </div>
+          <a href="booking.html?type=Double" class="btn btn-gold">Book Double</a>
+        </div>
+      </div>
+      <div class="room-card">
+        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80" alt="Triple Room" loading="lazy" />
+        <div class="room-card-body">
+          <h3>Triple Room</h3>
+          <p>Great for families and small groups, with extra space and a welcoming garden access.</p>
+          <div class="room-price">
+            <span class="price-from">From</span>
+            <span class="price-amount">Rs. 18,000</span>
+            <span class="price-per">/ night</span>
+          </div>
+          <div class="room-amenities">
+            <span class="amenity-tag">Free Wi-Fi</span>
+            <span class="amenity-tag">Hot Water</span>
+            <span class="amenity-tag">Garden Access</span>
+          </div>
+          <a href="booking.html?type=Triple" class="btn btn-gold">Book Triple</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:3rem;">
+      <a href="rooms.html" class="btn btn-dark">View All Rooms</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="container text-center">
+    <span class="section-label" style="color: var(--gold-light);">Room Rates</span>
+    <h2 class="section-title">Transparent <em>Pricing</em></h2>
+    <div class="section-line"></div>
+    <p>Flexible meal plans to suit every type of traveler.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Single Room</h3>
+        <p class="pricing-type">Ideal for solo travelers</p>
+        <div class="price-row"><span>Room Only</span><span>Rs. 12,000</span></div>
+        <div class="price-row"><span>Half Board</span><span>Rs. 15,000</span></div>
+        <div class="price-row"><span>Full Board</span><span>Rs. 18,000</span></div>
+        <div style="margin-top:1.5rem;"><a href="booking.html?type=Single" class="btn btn-gold" style="width:100%;display:block;text-align:center;">Book Single</a></div>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Double Room</h3>
+        <p class="pricing-type">Perfect for couples</p>
+        <div class="price-row"><span>Room Only</span><span>Rs. 15,500</span></div>
+        <div class="price-row"><span>Half Board</span><span>Rs. 18,500</span></div>
+        <div class="price-row"><span>Full Board</span><span>Rs. 24,500</span></div>
+        <div style="margin-top:1.5rem;"><a href="booking.html?type=Double" class="btn btn-gold" style="width:100%;display:block;text-align:center;">Book Double</a></div>
+      </div>
+      <div class="pricing-card">
+        <h3>Triple Room</h3>
+        <p class="pricing-type">Great for families</p>
+        <div class="price-row"><span>Room Only</span><span>Rs. 18,000</span></div>
+        <div class="price-row"><span>Half Board</span><span>Rs. 22,500</span></div>
+        <div class="price-row"><span>Full Board</span><span>Rs. 24,500</span></div>
+        <div style="margin-top:1.5rem;"><a href="booking.html?type=Triple" class="btn btn-gold" style="width:100%;display:block;text-align:center;">Book Triple</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES PREVIEW -->
+<section style="background: var(--white);">
+  <div class="container text-center">
+    <span class="section-label">Amenities</span>
+    <h2 class="section-title">Our <em>Facilities</em></h2>
+    <div class="section-line"></div>
+    <div class="facilities-grid">
+      <div class="facility-item"><div class="facility-icon">📶</div><h4>Free Wi-Fi</h4><p>High-speed internet throughout the hotel.</p></div>
+      <div class="facility-item"><div class="facility-icon">🛁</div><h4>Attached Bathroom</h4><p>Private bathroom with hot water in every room.</p></div>
+      <div class="facility-item"><div class="facility-icon">🍴</div><h4>Dining Options</h4><p>Sri Lankan &amp; international cuisine, flexible meal plans.</p></div>
+      <div class="facility-item"><div class="facility-icon">🚗</div><h4>Free Parking</h4><p>Secure parking for all guests at no extra charge.</p></div>
+      <div class="facility-item"><div class="facility-icon">🌳</div><h4>Garden &amp; Views</h4><p>Beautiful garden with stunning mountain scenery.</p></div>
+      <div class="facility-item"><div class="facility-icon">👤</div><h4>24/7 Reception</h4><p>Our friendly staff is always here for you.</p></div>
+    </div>
+    <div style="margin-top:3rem;"><a href="facilities.html" class="btn btn-dark">View All Facilities</a></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="container text-center">
+    <span class="section-label">Guest Reviews</span>
+    <h2 class="section-title">What Our <em>Guests Say</em></h2>
+    <div class="section-line"></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Absolutely magical stay. Waking up to those misty mountain views every morning was unforgettable. The staff treated us like family."</blockquote>
+        <div class="reviewer"><div class="reviewer-avatar">A</div><div><div class="reviewer-name">Anisha Perera</div><div class="reviewer-loc">Colombo, Sri Lanka</div></div></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Best value hotel in Nuwara Eliya by far. Clean rooms, incredible food, and the location near the tea plantations is just stunning."</blockquote>
+        <div class="reviewer"><div class="reviewer-avatar">R</div><div><div class="reviewer-name">Rajan Krishnamurthy</div><div class="reviewer-loc">Chennai, India</div></div></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★☆</div>
+        <blockquote>"A hidden gem in the hills. The garden is beautiful and the owners are incredibly warm and welcoming. We'll definitely be back."</blockquote>
+        <div class="reviewer"><div class="reviewer-avatar">S</div><div><div class="reviewer-name">Sarah Mitchell</div><div class="reviewer-loc">London, UK</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ATTRACTIONS -->
+<section style="background: var(--cream);">
+  <div class="container text-center">
+    <span class="section-label">Explore</span>
+    <h2 class="section-title">Discover <em>Nuwara Eliya</em></h2>
+    <div class="section-line"></div>
+    <p style="max-width:560px; margin: 0 auto 3rem;">Enchanting attractions just minutes from your door.</p>
+    <div class="attractions-grid">
+      <div class="attraction-item"><img src="https://images.unsplash.com/photo-1606185540834-d6d8291e46b5?w=600&q=80" alt="Tea Plantations" loading="lazy" /><div class="attraction-overlay"><div class="icon">🍃</div><h4>Tea Plantations</h4><span>5 km away</span></div></div>
+      <div class="attraction-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Gregory Lake" loading="lazy" /><div class="attraction-overlay"><div class="icon">🌊</div><h4>Gregory Lake</h4><span>3 km away</span></div></div>
+      <div class="attraction-item"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" alt="Horton Plains" loading="lazy" /><div class="attraction-overlay"><div class="icon">⛰️</div><h4>Horton Plains</h4><span>30 km away</span></div></div>
+      <div class="attraction-item"><img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80" alt="Hakgala Gardens" loading="lazy" /><div class="attraction-overlay"><div class="icon">🌸</div><h4>Hakgala Gardens</h4><span>8 km away</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container" style="max-width:900px;">
+    <span class="section-label">Help</span>
+    <h2 class="section-title">Frequently Asked <em>Questions</em></h2>
+    <div class="section-line"></div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q">What are the check-in and check-out times?<span class="faq-icon">+</span></button><div class="faq-a"><p>Check-in is from 2:00 PM and check-out is by 11:00 AM. Early check-in and late check-out may be arranged on request, subject to availability.</p></div></div>
+      <div class="faq-item"><button class="faq-q">What meal plans are available?<span class="faq-icon">+</span></button><div class="faq-a"><p>We offer Room Only, Half Board (breakfast &amp; dinner), and Full Board (breakfast, lunch &amp; dinner). Choose your plan at the time of booking.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Is parking available?<span class="faq-icon">+</span></button><div class="faq-a"><p>Yes, free secure parking is available for all guests within the hotel premises.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How far is the hotel from Nuwara Eliya town?<span class="faq-icon">+</span></button><div class="faq-a"><p>We're located in Blackpool, approximately 2 km from the town center. Local tuk-tuks and transport are readily available.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Do you offer airport transfers?<span class="faq-icon">+</span></button><div class="faq-a"><p>Yes, we can arrange transfers from Bandaranaike International Airport or any location in Sri Lanka. Contact us in advance to arrange this.</p></div></div>
+      <div class="faq-item"><button class="faq-q">What is the cancellation policy?<span class="faq-icon">+</span></button><div class="faq-a"><p>Cancellations 48+ hours before check-in receive a full refund. Within 48 hours, one night's stay is charged. No-shows are charged the full booking amount.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <h2>Stay <em style="color:var(--gold-light);">Updated</em></h2>
+    <p>Subscribe for special offers, travel tips, and news from the hills of Nuwara Eliya.</p>
+    <form class="newsletter-form" onsubmit="return false;">
+      <input type="email" placeholder="Your email address" />
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Mount Edge Hotel</h3>
+      <p>Your peaceful retreat in the beautiful hills of Nuwara Eliya. Experience comfort, nature, and genuine Sri Lankan hospitality.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="facilities.html">Facilities</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html">Book Now</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+        <li><a href="terms.html#cancellation">Cancellation Policy</a></li>
+        <li><a href="terms.html#privacy">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h4>Contact Us</h4>
+      <p>📍 No.73, Dharmapalapura, Blackpool, Nuwara Eliya</p>
+      <p>📞 <a href="tel:+94777659300">+94 77 765 9300</a></p>
+      <p>✉ <a href="mailto:mountedgehotel.lk@gmail.com">mountedgehotel.lk@gmail.com</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Mount Edge Hotel. All rights reserved.</span>
+    <span><a href="terms.html">Terms</a> · <a href="terms.html#privacy">Privacy</a> · <a href="contact.html">Support</a></span>
+  </div>
+</footer>
+
+<button class="scroll-top">↑</button>
+<script src="js/main.js"></script>
+</body>
+</html>
