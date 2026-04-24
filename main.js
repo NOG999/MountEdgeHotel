@@ -117,11 +117,31 @@ document.getElementById("booking-form")?.addEventListener("submit", async functi
   }
 });
 
-// ── CONTACT FORM ──
-document.getElementById('contact-form')?.addEventListener('submit', e => {
+// ── CONTACT FORM SUBMIT ──
+document.getElementById("contact-form")?.addEventListener("submit", async function(e) {
   e.preventDefault();
-  document.getElementById('contact-success')?.style.setProperty('display', 'block');
-  e.target.style.display = 'none';
+
+  const form = e.target;
+  const data = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    if (response.ok) {
+      document.getElementById("contact-success").style.display = "block";
+      form.style.display = "none";
+    } else {
+      alert("Message failed. Please try again.");
+    }
+  } catch (error) {
+    alert("Error sending message.");
+  }
 });
 
 // ── GALLERY LIGHTBOX ──
