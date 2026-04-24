@@ -91,10 +91,30 @@ if (urlParams.get('checkout') && document.getElementById('b-checkout')) {
 calcBooking();
 
 // ── BOOKING FORM SUBMIT ──
-document.getElementById('booking-form')?.addEventListener('submit', e => {
-  e.preventDefault();
-  document.getElementById('booking-success')?.style.setProperty('display', 'block');
-  e.target.style.display = 'none';
+document.getElementById("booking-form")?.addEventListener("submit", async function(e) {
+  e.preventDefault(); // stop reload
+
+  const form = e.target;
+  const data = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      document.getElementById("booking-success").style.display = "block";
+      form.style.display = "none";
+    } else {
+      alert("Booking failed. Please try again.");
+    }
+  } catch (error) {
+    alert("Error sending booking.");
+  }
 });
 
 // ── CONTACT FORM ──
