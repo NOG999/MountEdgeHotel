@@ -949,8 +949,9 @@ footer {
   .newsletter-form { flex-direction: column; }
 }
 
-/* Hide mobile hamburger menu */
+/* Hide mobile hamburger menu 
 .hamburger {
   display: none !important;
 }
 }
+*/
