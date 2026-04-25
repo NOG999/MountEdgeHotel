@@ -950,8 +950,7 @@ footer {
 }
 
 /* Hide mobile hamburger menu */
-/*.hamburger {
+.hamburger {
   display: none !important;
 }
 }
-*/
