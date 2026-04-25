@@ -925,7 +925,10 @@ footer {
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
   nav.scrolled { padding: 0.8rem 1.5rem; }
-  .nav-links, .nav-book { display: none; }
+  nav > .nav-links,
+  nav .nav-book {
+  display: none;
+  }
   .hamburger { display: flex; }
   section { padding: 4rem 1.5rem; }
   .welcome-split { grid-template-columns: 1fr; gap: 3rem; }
@@ -948,9 +951,3 @@ footer {
   .newsletter-form { flex-direction: column; }
 }
 
-/* Hide mobile hamburger menu 
-.hamburger {
-  display: none !important;
-}
-}
-*/
