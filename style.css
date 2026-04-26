@@ -120,7 +120,7 @@ nav.scrolled .nav-book:hover { background: var(--gold); color: var(--white) !imp
   transition: all 0.3s;
 }
 
-nav.scrolled .hamburger span { background: var(--dark); }
+nav.scrolled .hamburger span { background: var(--white); }
 
 /* ── HERO ── */
 .hero {
