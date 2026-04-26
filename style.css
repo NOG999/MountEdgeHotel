@@ -116,11 +116,11 @@ nav.scrolled .nav-book:hover { background: var(--gold); color: var(--white) !imp
 
 .hamburger span {
   display: block; width: 24px; height: 1.5px;
-  background: var(--white);
+  background: #ffffff;
   transition: all 0.3s;
 }
 
-nav.scrolled .hamburger span { background: var(--white); }
+nav.scrolled .hamburger span { background: #2b1a0e; }
 
 /* ── HERO ── */
 .hero {
