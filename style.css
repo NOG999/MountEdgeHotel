@@ -886,7 +886,7 @@ footer {
 .mobile-close {
   position: absolute; top: 1.5rem; right: 2rem;
   background: none; border: none;
-  color: var(--white); font-size: 2rem; cursor: pointer;
+  color: #ffffff; font-size: 2rem; cursor: pointer;
 }
 
 /* ── SCROLL TO TOP ── */
