@@ -215,7 +215,7 @@ nav.scrolled .hamburger span { background: #2b1a0e; }
 
 .btn-outline {
   background: transparent;
-  color: var(--white);
+  color: #ffffff;
   border: 1px solid rgba(255,255,255,0.6);
 }
 
