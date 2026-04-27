@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Your Stay | Mount Edge Hotel</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+<nav>
+  <a href="../" class="nav-logo">Mount Edge Hotel</a>
+  <ul class="nav-links">
+    <li><a href="../">Home</a></li>
+    <li><a href="../rooms/">Rooms</a></li>
+    <li><a href="../facilities/">Facilities</a></li>
+    <li><a href="../gallery/">Gallery</a></li>
+    <li><a href="../about/">About</a></li>
+    <li><a href="../contact/">Contact</a></li>
+    <li><a href="../booking/" class="nav-book active">Book Now</a></li>
+  </ul>
+  <button class="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu"><button class="mobile-close">×</button><ul class="nav-links"><li><a href="../">Home</a></li><li><a href="../rooms/">Rooms</a></li><li><a href="../facilities/">Facilities</a></li><li><a href="../gallery/">Gallery</a></li><li><a href="../about/">About</a></li><li><a href="../contact/">Contact</a></li><li><a href="../booking/">Book Now</a></li></ul></div>
+
+<section class="booking-section">
+  <div class="booking-grid container">
+    <!-- FORM -->
+    <div class="booking-form-wrap">
+      <span class="section-label">Reservation</span>
+      <h2>Book Your <em>Stay</em></h2>
+      <div class="section-line"></div>
+
+      <div id="booking-success" style="display:none; padding:2.5rem; background:var(--mist); text-align:center; margin-bottom:1rem;">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--green); margin-bottom:0.5rem;">✓ Booking Request Received!</p>
+        <p style="font-size:0.9rem; color:var(--text-light);">Thank you for choosing Mount Edge Hotel. We'll confirm your reservation via email within 24 hours.</p>
+        <a href="../" class="btn btn-gold" style="margin-top:1.5rem; display:inline-block;">Back to Home</a>
+      </div>
+
+      <form id="booking-form">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="John" required /></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe" required /></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@example.com" required /></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+94 77 000 0000" required /></div>
+        <div class="form-row">
+          <div class="form-group"><label>Check-in Date</label><input type="date" id="b-checkin" required /></div>
+          <div class="form-group"><label>Check-out Date</label><input type="date" id="b-checkout" required /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Room Type</label>
+            <select id="b-roomtype" required>
+              <option value="Single">Single Room</option>
+              <option value="Double" selected>Double Room</option>
+              <option value="Triple">Triple Room</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Number of Guests</label>
+            <select>
+              <option>1 Guest</option>
+              <option selected>2 Guests</option>
+              <option>3 Guests</option>
+              <option>4 Guests</option>
+              <option>5+ Guests</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Meal Plan</label>
+          <select id="b-meal">
+            <option>Room Only</option>
+            <option>Half Board</option>
+            <option>Full Board</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Special Requests (Optional)</label><textarea rows="3" placeholder="Any dietary requirements, special occasions, or other requests..."></textarea></div>
+        <button type="submit" class="btn btn-gold" style="width:100%; padding:1.1rem; font-size:0.85rem; letter-spacing:0.2em;">Confirm Booking Request</button>
+        <p style="font-size:0.78rem; color:var(--text-light); text-align:center; margin-top:1rem;">We'll confirm your reservation within 24 hours. No payment required at this stage.</p>
+      </form>
+    </div>
+
+    <!-- SUMMARY -->
+    <div>
+      <div class="booking-summary">
+        <h3>Booking <em style="font-style:italic; color:var(--gold-light);">Summary</em></h3>
+        <div class="summary-item"><span>Room Type</span><span id="sum-type">Double Room</span></div>
+        <div class="summary-item"><span>Meal Plan</span><span id="sum-meal">Room Only</span></div>
+        <div class="summary-item"><span>Duration</span><span id="sum-nights">1 Night</span></div>
+        <div class="summary-item"><span>Rate per Night</span><span id="sum-rate">Rs. 15,500</span></div>
+        <div class="summary-total"><span>Total</span><span id="sum-total">Rs. 15,500</span></div>
+        <p style="font-size:0.75rem; color:rgba(255,255,255,0.4); margin-top:1rem;">* Rates are in Sri Lankan Rupees. Taxes may apply.</p>
+      </div>
+
+      <div style="border: 1px solid rgba(255,255,255,0.08); padding:2rem; margin-top:1.5rem;">
+        <h4 style="color:var(--gold-light); font-family:'Jost',sans-serif; font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.2rem;">Need Help?</h4>
+        <p style="color:rgba(255,255,255,0.6); font-size:0.85rem; margin-bottom:0.7rem;">📞 <a href="tel:+94777659300" style="color:rgba(255,255,255,0.8);">+94 77 765 9300</a></p>
+        <p style="color:rgba(255,255,255,0.6); font-size:0.85rem;">✉ <a href="mailto:mountedgehotel.lk@gmail.com" style="color:rgba(255,255,255,0.8);">mountedgehotel.lk@gmail.com</a></p>
+      </div>
+
+      <div style="border: 1px solid rgba(255,255,255,0.08); padding:2rem; margin-top:1.5rem;">
+        <h4 style="color:var(--gold-light); font-family:'Jost',sans-serif; font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.2rem;">Cancellation Policy</h4>
+        <p style="color:rgba(255,255,255,0.6); font-size:0.82rem; line-height:1.7;">Free cancellation up to 48 hours before check-in. Cancellations within 48 hours are charged one night's stay.</p>
+        <a href="../terms/#cancellation" style="color:var(--gold-light); font-size:0.78rem; display:inline-block; margin-top:0.7rem;">Read full policy →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><h3>Mount Edge Hotel</h3><p>Your peaceful retreat in the beautiful hills of Nuwara Eliya.</p></div>
+    <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../">Home</a></li><li><a href="../rooms/">Rooms</a></li><li><a href="../booking/">Book Now</a></li><li><a href="../contact/">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul><li><a href="../terms/">Terms &amp; Conditions</a></li><li><a href="../terms/#cancellation">Cancellation Policy</a></li></ul></div>
+    <div class="footer-col footer-contact"><h4>Contact Us</h4><p>📍 No.73, Dharmapalapura, Blackpool, Nuwara Eliya</p><p>📞 <a href="tel:+94777659300">+94 77 765 9300</a></p><p>✉ <a href="mailto:mountedgehotel.lk@gmail.com">mountedgehotel.lk@gmail.com</a></p></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Mount Edge Hotel. All rights reserved.</span></div>
+</footer>
+<button class="scroll-top">↑</button>
+<script src="js/main.js"></script>
+</body>
+</html>
