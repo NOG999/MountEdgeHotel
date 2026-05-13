@@ -1,43 +1,925 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/x-icon" href="favicon.png" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mount Edge Hotel | Nuwara Eliya, Sri Lanka</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="mountedge-enhancements.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mount Edge Hotel | Nuwara Eliya, Sri Lanka</title>
+<link rel="icon" type="image/x-icon" href="favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f5efe6;
+    --deep: #0e1a14;
+    --forest: #1a2e20;
+    --mist: #8ba898;
+    --white: #fdfaf5;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Josefin Sans', sans-serif;
+    background: var(--deep);
+    color: var(--cream);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.6s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(14,26,20,0.95);
+    backdrop-filter: blur(20px);
+    padding: 1.2rem 4rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,239,230,0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--gold);
+    transform: scaleX(0); transform-origin: right;
+    transition: transform 0.4s ease;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav-book {
+    border: 1px solid var(--gold) !important;
+    padding: 0.5rem 1.2rem;
+    color: var(--gold) !important;
+    transition: background 0.3s !important;
+  }
+  .nav-book:hover { background: var(--gold); color: var(--deep) !important; }
+  .nav-book::after { display: none !important; }
+
+  /* ========== HERO ========== */
+  .hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* 3D CANVAS */
+  #hero-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+
+  /* Parallax layers */
+  .hero-layer {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+  }
+  .hero-layer-1 {
+    background: linear-gradient(160deg, #0e1a14 0%, #1a3020 50%, #0a1510 100%);
+  }
+  .hero-layer-2 {
+    background: radial-gradient(ellipse at 60% 40%, rgba(26,46,32,0.8) 0%, transparent 70%);
+  }
+
+  /* Animated mist particles */
+  .mist-container {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .mist-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0;
+    animation: mistFloat linear infinite;
+  }
+
+  @keyframes mistFloat {
+    0% { transform: translateX(-20%) translateY(0) scale(0.8); opacity: 0; }
+    20% { opacity: 0.12; }
+    80% { opacity: 0.08; }
+    100% { transform: translateX(120%) translateY(-30%) scale(1.3); opacity: 0; }
+  }
+
+  /* Floating particles */
+  .particles {
+    position: absolute; inset: 0;
+    pointer-events: none;
+  }
+  .particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleDrift linear infinite;
+  }
+  @keyframes particleDrift {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-10vh) translateX(var(--drift)); opacity: 0; }
+  }
+
+  /* 3D Mountain SVG scene */
+  .mountain-scene {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 65%;
+    pointer-events: none;
+  }
+  .mountain-scene svg { width: 100%; height: 100%; }
+
+  /* Hero content */
+  .hero-content {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 2rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+    text-shadow: 0 0 80px rgba(201,168,76,0.2);
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+  }
+  .hero-sub {
+    margin-top: 1.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(245,239,230,0.5);
+    opacity: 0;
+    animation: fadeUp 1s 1.1s forwards;
+  }
+  .hero-ctas {
+    margin-top: 3rem;
+    display: flex; gap: 1.5rem; justify-content: center;
+    opacity: 0;
+    animation: fadeUp 1s 1.4s forwards;
+  }
+  .btn-gold-3d {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--gold) 0%, #a8843a 100%);
+    color: var(--deep);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 8px 30px rgba(201,168,76,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .btn-gold-3d::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .btn-gold-3d:hover { transform: translateY(-3px) rotateX(5deg); box-shadow: 0 15px 40px rgba(201,168,76,0.4); }
+  .btn-gold-3d:hover::before { opacity: 1; }
+  .btn-outline-3d {
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(245,239,230,0.3);
+    color: var(--cream);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: none;
+    transition: border-color 0.3s, color 0.3s, transform 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .btn-outline-3d:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
+
+  .scroll-hint {
+    position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0; animation: fadeIn 1s 2s forwards;
+  }
+  .scroll-hint span {
+    font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(245,239,230,0.4);
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, rgba(201,168,76,0.8), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.5); opacity: 0.3; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* ========== AVAILABILITY BAR ========== */
+  .avail-bar {
+    background: rgba(26,46,32,0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(201,168,76,0.2);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    padding: 1.5rem 4rem;
+    position: relative; z-index: 20;
+  }
+  .avail-form {
+    display: flex; gap: 1.5rem; align-items: flex-end; flex-wrap: wrap;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .avail-group { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; min-width: 130px; }
+  .avail-group label {
+    font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  .avail-group input, .avail-group select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--cream);
+    padding: 0.7rem 1rem;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    outline: none;
+    transition: border-color 0.3s;
+    cursor: none;
+  }
+  .avail-group input:focus, .avail-group select:focus { border-color: var(--gold); }
+  .avail-group select option { background: var(--forest); }
+  .btn-check {
+    padding: 0.7rem 2rem;
+    background: var(--gold);
+    color: var(--deep);
+    border: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: none;
+    white-space: nowrap;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .btn-check:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* ========== SECTIONS ========== */
+  section { padding: 8rem 4rem; }
+
+  .section-label {
+    font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); display: block; margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--white);
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 2rem 0;
+  }
+
+  /* ========== WELCOME (3D CARD TILT) ========== */
+  .welcome { background: var(--forest); }
+  .welcome-split {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: center;
+  }
+  .welcome-img-wrap {
+    position: relative;
+    perspective: 1000px;
+  }
+  .tilt-card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .tilt-card img {
+    width: 100%; height: 500px;
+    object-fit: cover; display: block;
+    filter: brightness(0.85) saturate(1.1);
+  }
+  .tilt-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(14,26,20,0.5) 0%, transparent 50%);
+  }
+  .welcome-badge {
+    position: absolute; bottom: 2rem; left: 2rem; z-index: 2;
+    background: rgba(201,168,76,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 1.2rem 1.5rem;
+    transform: translateZ(30px);
+  }
+  .welcome-badge .big {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; line-height: 1;
+    color: var(--gold);
+  }
+  .welcome-badge .small {
+    font-size: 0.55rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(245,239,230,0.7);
+  }
+  .welcome-text p { color: rgba(245,239,230,0.7); line-height: 1.9; font-size: 0.85rem; letter-spacing: 0.05em; }
+  .welcome-text p + p { margin-top: 1rem; }
+  .features-grid {
+    margin-top: 2.5rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+  .feat-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.2rem;
+    border: 1px solid rgba(201,168,76,0.1);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .feat-item:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-3px); }
+  .feat-icon { font-size: 1.3rem; }
+  .feat-item h4 { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .feat-item p { font-size: 0.75rem; color: rgba(245,239,230,0.5); line-height: 1.6; }
+
+  /* ========== 3D ROTATING ROOMS ========== */
+  .rooms-section {
+    background: var(--deep);
+    text-align: center;
+  }
+  .rooms-section .section-line { margin: 2rem auto; }
+  .rooms-3d-container {
+    perspective: 1200px;
+    max-width: 1200px; margin: 0 auto;
+    padding-top: 3rem;
+  }
+  .rooms-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    transform-style: preserve-3d;
+  }
+  .room-card-3d {
+    position: relative;
+    background: var(--forest);
+    border: 1px solid rgba(201,168,76,0.1);
+    overflow: hidden;
+    cursor: none;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s;
+  }
+  .room-card-3d:hover {
+    transform: translateY(-15px) rotateX(5deg);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.1);
+  }
+  .room-card-3d img {
+    width: 100%; height: 220px; object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+    filter: brightness(0.85) saturate(1.1);
+  }
+  .room-card-3d:hover img { transform: scale(1.08); }
+  .room-img-overlay {
+    position: absolute; top: 0; left: 0; right: 0; height: 220px;
+    background: linear-gradient(to bottom, transparent 40%, rgba(26,46,32,0.6) 100%);
+    pointer-events: none;
+  }
+  .room-body { padding: 1.8rem; }
+  .room-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300;
+    color: var(--white); margin-bottom: 0.6rem;
+  }
+  .room-body p { font-size: 0.72rem; color: rgba(245,239,230,0.55); line-height: 1.7; margin-bottom: 1.2rem; }
+  .room-price-tag {
+    display: flex; align-items: baseline; gap: 0.3rem;
+    margin-bottom: 1.2rem;
+  }
+  .price-from { font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(201,168,76,0.6); }
+  .price-amount { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--gold); }
+  .price-per { font-size: 0.6rem; color: rgba(245,239,230,0.4); }
+  .amenity-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .amenity-tag {
+    font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(201,168,76,0.25);
+    color: rgba(245,239,230,0.5);
+  }
+  .btn-room {
+    display: block; text-align: center;
+    padding: 0.8rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none;
+    cursor: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .btn-room:hover { background: var(--gold); color: var(--deep); }
+
+  /* ========== FLOATING STATS ========== */
+  .stats-section {
+    background: linear-gradient(135deg, #0a1510 0%, #1a2e20 50%, #0a1510 100%);
+    padding: 5rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .stats-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
+  }
+  .stats-grid {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+    position: relative;
+  }
+  .stat-item {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    border: 1px solid rgba(201,168,76,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s, border-color 0.4s;
+  }
+  .stat-item:hover { transform: translateY(-8px); border-color: rgba(201,168,76,0.4); }
+  .stat-item::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    transform: scaleX(0); transition: transform 0.4s;
+  }
+  .stat-item:hover::before { transform: scaleX(1); }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300;
+    color: var(--gold); line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(245,239,230,0.4);
+    margin-top: 0.5rem; display: block;
+  }
+
+  /* ========== PRICING ========== */
+  .pricing-section { background: var(--forest); text-align: center; }
+  .pricing-section .section-line { margin: 2rem auto; }
+  .pricing-grid {
+    max-width: 1100px; margin: 3rem auto 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  }
+  .pricing-card {
+    padding: 3rem 2rem;
+    border: 1px solid rgba(201,168,76,0.15);
+    background: rgba(14,26,20,0.5);
+    position: relative; overflow: hidden;
+    transition: transform 0.4s, box-shadow 0.4s;
+  }
+  .pricing-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    transform: scaleX(0); transition: transform 0.4s;
+  }
+  .pricing-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+  .pricing-card:hover::before { transform: scaleX(1); }
+  .pricing-card.featured {
+    border-color: rgba(201,168,76,0.5);
+    background: rgba(201,168,76,0.05);
+  }
+  .pricing-card.featured::before { transform: scaleX(1); }
+  .pricing-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; color: var(--white); margin-bottom: 0.4rem;
+  }
+  .pricing-type { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,239,230,0.4); margin-bottom: 2rem; display: block; }
+  .price-row {
+    display: flex; justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(245,239,230,0.06);
+    font-size: 0.75rem; letter-spacing: 0.05em;
+    color: rgba(245,239,230,0.7);
+  }
+  .price-row span:last-child { color: var(--gold-light); }
+  .btn-pricing {
+    display: block; text-align: center; margin-top: 2rem;
+    padding: 0.9rem;
+    background: var(--gold);
+    color: var(--deep);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; cursor: none;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .btn-pricing:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* ========== FACILITIES HONEYCOMB ========== */
+  .facilities-section { background: var(--deep); text-align: center; }
+  .facilities-section .section-line { margin: 2rem auto; }
+  .facilities-grid {
+    max-width: 1000px; margin: 3rem auto 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .facility-card {
+    padding: 2.5rem 1.5rem; text-align: center;
+    border: 1px solid rgba(201,168,76,0.1);
+    background: rgba(26,46,32,0.3);
+    position: relative; overflow: hidden;
+    transition: transform 0.4s, background 0.4s, border-color 0.4s;
+    cursor: none;
+  }
+  .facility-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(201,168,76,0.08) 0%, transparent 70%);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .facility-card:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(201,168,76,0.4); }
+  .facility-card:hover::before { opacity: 1; }
+  .facility-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+  .facility-card h4 {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.6rem;
+  }
+  .facility-card p { font-size: 0.72rem; color: rgba(245,239,230,0.5); line-height: 1.6; }
+
+  /* ========== ATTRACTIONS ========== */
+  .attractions-section { background: var(--forest); text-align: center; }
+  .attractions-section .section-line { margin: 2rem auto; }
+  .attractions-grid {
+    max-width: 1200px; margin: 3rem auto 0;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+  }
+  .attraction-card {
+    position: relative; overflow: hidden;
+    height: 320px; cursor: none;
+  }
+  .attraction-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.7) saturate(0.8);
+    transition: transform 0.7s ease, filter 0.5s;
+  }
+  .attraction-card:hover img { transform: scale(1.1); filter: brightness(0.8) saturate(1.1); }
+  .attraction-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(14,26,20,0.9) 0%, transparent 60%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.5rem;
+    transition: background 0.4s;
+  }
+  .attraction-card:hover .attraction-overlay {
+    background: linear-gradient(to top, rgba(14,26,20,0.95) 0%, rgba(14,26,20,0.2) 60%);
+  }
+  .attraction-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .attraction-overlay h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 300; color: var(--white);
+    margin-bottom: 0.3rem;
+  }
+  .attraction-dist { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+  .attraction-desc {
+    font-size: 0.7rem; color: rgba(245,239,230,0.6);
+    margin-top: 0.6rem; line-height: 1.6;
+    max-height: 0; overflow: hidden; transition: max-height 0.4s;
+  }
+  .attraction-card:hover .attraction-desc { max-height: 80px; }
+
+  /* ========== FAQ ========== */
+  .faq-section { background: var(--deep); }
+  .faq-inner { max-width: 800px; margin: 3rem auto 0; }
+  .faq-item {
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    overflow: hidden;
+  }
+  .faq-q {
+    width: 100%; text-align: left; background: none; border: none;
+    color: var(--cream);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 1.5rem 0;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: none; transition: color 0.3s;
+  }
+  .faq-q:hover { color: var(--gold); }
+  .faq-icon {
+    width: 24px; height: 24px;
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; color: var(--gold);
+    flex-shrink: 0; transition: transform 0.4s, background 0.3s;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--gold); color: var(--deep); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .faq-item.open .faq-a { max-height: 200px; }
+  .faq-a p {
+    padding-bottom: 1.5rem;
+    font-size: 0.8rem; color: rgba(245,239,230,0.6); line-height: 1.8;
+  }
+
+  /* ========== NEWSLETTER ========== */
+  .newsletter-section {
+    background: linear-gradient(135deg, #0e1a14, #1a3020);
+    text-align: center; padding: 6rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .newsletter-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border: 1px solid rgba(201,168,76,0.08);
+    border-radius: 50%;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    animation: ringPulse 4s ease-in-out infinite;
+  }
+  .newsletter-section::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 50%;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    animation: ringPulse 4s ease-in-out infinite 1s;
+  }
+  @keyframes ringPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.5; }
+  }
+  .newsletter-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: var(--white);
+    margin-bottom: 1rem; position: relative;
+  }
+  .newsletter-section p {
+    font-size: 0.75rem; letter-spacing: 0.1em; color: rgba(245,239,230,0.5);
+    margin-bottom: 2.5rem; position: relative;
+  }
+  .newsletter-form {
+    display: flex; max-width: 480px; margin: 0 auto;
+    position: relative;
+  }
+  .newsletter-form input {
+    flex: 1; padding: 1rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.3); border-right: none;
+    color: var(--cream);
+    font-family: 'Josefin Sans', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.1em; outline: none;
+    transition: border-color 0.3s;
+    cursor: none;
+  }
+  .newsletter-form input:focus { border-color: var(--gold); }
+  .newsletter-form input::placeholder { color: rgba(245,239,230,0.3); }
+  .newsletter-form button {
+    padding: 1rem 2rem;
+    background: var(--gold); border: none;
+    color: var(--deep);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: none; transition: background 0.3s;
+  }
+  .newsletter-form button:hover { background: var(--gold-light); }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: #060e09;
+    padding: 5rem 4rem 2rem;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+  .footer-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 4rem;
+    padding-bottom: 3rem;
+  }
+  .footer-brand h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .footer-brand p { font-size: 0.75rem; color: rgba(245,239,230,0.4); line-height: 1.8; }
+  .footer-col h4 {
+    font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.7rem; }
+  .footer-col ul li a {
+    font-size: 0.72rem; color: rgba(245,239,230,0.4);
+    text-decoration: none; letter-spacing: 0.05em;
+    transition: color 0.3s;
+  }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-contact p {
+    font-size: 0.72rem; color: rgba(245,239,230,0.4);
+    line-height: 1.8; margin-bottom: 0.5rem;
+  }
+  .footer-contact a { color: rgba(245,239,230,0.4); text-decoration: none; transition: color 0.3s; }
+  .footer-contact a:hover { color: var(--gold); }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245,239,230,0.05);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(245,239,230,0.25);
+  }
+  .footer-bottom a { color: rgba(245,239,230,0.25); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--gold); }
+
+  /* Ensure all sections sit above global particle canvas */
+  nav, .avail-bar, .welcome, .rooms-section, .stats-section,
+  .pricing-section, .facilities-section, .attractions-section,
+  .faq-section, .newsletter-section, footer, .scroll-top-btn {
+    position: relative;
+    z-index: 1;
+  }
+  /* Sections with dark bg keep their backgrounds but allow canvas to show through edges */
+  .rooms-section, .pricing-section, .facilities-section,
+  .faq-section, .stats-section {
+    background: transparent !important;
+  }
+  .rooms-section::before, .pricing-section::before,
+  .facilities-section::before, .faq-section::before,
+  .stats-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: inherit;
+    z-index: -1;
+  }
+  /* Re-apply section backgrounds via pseudo */
+  .rooms-section { background: transparent !important; }
+  .rooms-section::before { background: rgba(14,26,20,0.82) !important; }
+  .pricing-section::before { background: rgba(26,46,32,0.85) !important; }
+  .facilities-section::before { background: rgba(14,26,20,0.82) !important; }
+  .stats-section::before { background: rgba(10,21,16,0.88) !important; }
+  .faq-section::before { background: rgba(14,26,20,0.85) !important; }
+  .welcome { background: rgba(26,46,32,0.9) !important; }
+  .newsletter-section { background: rgba(14,26,20,0.9) !important; }
+  footer { background: rgba(6,14,9,0.96) !important; }
+
+  /* Scroll-reveal */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* scroll top */
+  .scroll-top-btn {
+    position: fixed; bottom: 2rem; right: 2rem;
+    width: 44px; height: 44px;
+    border: 1px solid rgba(201,168,76,0.4);
+    background: rgba(14,26,20,0.8);
+    backdrop-filter: blur(10px);
+    color: var(--gold); cursor: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.4s, transform 0.4s, border-color 0.3s;
+    z-index: 50;
+  }
+  .scroll-top-btn.visible { opacity: 1; transform: translateY(0); }
+  .scroll-top-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.1); }
+
+
+  /* ========== RESPONSIVE / MOBILE FIXES ========== */
+  @media (max-width: 1000px) {
+    nav { padding: 1.2rem 1.5rem; }
+    nav.scrolled { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.58rem; letter-spacing: 0.16em; }
+    section { padding: 5rem 1.5rem; }
+    .welcome-split { grid-template-columns: 1fr; gap: 3rem; }
+    .rooms-grid, .pricing-grid, .facilities-grid, .attractions-grid { grid-template-columns: 1fr 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+
+  @media (max-width: 700px) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    nav { padding: 1rem; overflow-x: auto; gap: 1rem; }
+    .nav-logo { font-size: 1rem; letter-spacing: 0.16em; white-space: nowrap; }
+    .nav-links { gap: 0.85rem; overflow-x: auto; padding-bottom: 0.25rem; }
+    .nav-links a { font-size: 0.52rem; letter-spacing: 0.12em; white-space: nowrap; }
+    .nav-book { padding: 0.45rem 0.75rem; }
+    .hero-title { font-size: clamp(3rem, 16vw, 5rem); }
+    .hero-sub { font-size: 0.62rem; letter-spacing: 0.18em; }
+    .hero-ctas { flex-direction: column; align-items: center; gap: 1rem; }
+    .btn-gold-3d, .btn-outline-3d { cursor: pointer; width: 100%; max-width: 280px; text-align: center; }
+    .avail-bar { padding: 1.5rem; }
+    .avail-form { gap: 1rem; }
+    .rooms-grid, .pricing-grid, .facilities-grid, .attractions-grid, .stats-grid { grid-template-columns: 1fr; }
+    .tilt-card img { height: 360px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .attraction-card { height: 260px; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form input { border-right: 1px solid rgba(201,168,76,0.3); }
+    .footer-grid, .footer-bottom { grid-template-columns: 1fr; display: block; text-align: left; }
+    .footer-bottom span { display: block; margin-top: 1rem; }
+  }
+
+</style>
 </head>
 <body>
 
-<!-- NOTICE BANNER -->
-<!-- <div class="notice-banner">
-  ✦ Special Offer: <strong>15% off</strong> for bookings in April &amp; May! Use code: <strong>HILLSIDE15</strong>
-  <button class="notice-close">×</button>
-</div>-->
+<!-- GLOBAL PARTICLE CANVAS (fills empty spaces across all sections) -->
+<canvas id="global-particles" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
 
 <!-- NAV -->
-<nav>
-  <a href="" class="nav-logo">
-    <img src="Logo.png" alt="Mount Edge Hotel" style="height:50px; width:auto;" loading="eager" fetchpriority="high" />
-  </a>
-  <ul class="nav-links">
-    <li><a href="" class="active">Home</a></li>
-    <li><a href="rooms/">Rooms</a></li>
-    <li><a href="facilities/">Facilities</a></li>
-    <li><a href="gallery/">Gallery</a></li>
-    <li><a href="about/">About</a></li>
-    <li><a href="contact/">Contact</a></li>
-    <li><a href="booking/" class="nav-book">Book Now</a></li>
-  </ul>
-  <button class="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu">
-  <button class="mobile-close">×</button>
+<nav id="nav">
+  <a href="" class="nav-logo">Mount Edge</a>
   <ul class="nav-links">
     <li><a href="">Home</a></li>
     <li><a href="rooms/">Rooms</a></li>
@@ -45,34 +927,68 @@
     <li><a href="gallery/">Gallery</a></li>
     <li><a href="about/">About</a></li>
     <li><a href="contact/">Contact</a></li>
-    <li><a href="booking/">Book Now</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="booking/" class="nav-book">Book Now</a></li>
   </ul>
-</div>
+</nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
+<section class="hero" id="hero">
+  <canvas id="hero-canvas"></canvas>
+
+  <!-- Mist blobs -->
+  <div class="mist-container" id="mist"></div>
+
+  <!-- Gold particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Mountain SVG scene -->
+  <div class="mountain-scene">
+    <svg viewBox="0 0 1440 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Back mountains -->
+      <polygon points="0,500 200,180 380,320 560,100 740,280 900,150 1100,240 1280,120 1440,200 1440,500" fill="rgba(15,28,18,0.7)"/>
+      <!-- Mid mountains -->
+      <polygon points="0,500 100,280 300,380 500,200 680,320 850,180 1050,300 1200,200 1440,260 1440,500" fill="rgba(20,38,24,0.85)"/>
+      <!-- Snow caps -->
+      <polygon points="200,180 220,195 240,185 260,170 280,190 300,175 270,155 240,160" fill="rgba(245,239,230,0.15)"/>
+      <polygon points="560,100 575,115 595,105 615,90 635,110 650,98 625,75 590,82" fill="rgba(245,239,230,0.2)"/>
+      <polygon points="900,150 915,165 935,155 955,140 975,160 990,148 965,125 930,132" fill="rgba(245,239,230,0.15)"/>
+      <polygon points="1280,120 1295,135 1315,125 1335,110 1355,130 1370,118 1345,95 1310,102" fill="rgba(245,239,230,0.1)"/>
+      <!-- Foreground hill -->
+      <path d="M0,500 Q360,380 720,420 Q1080,380 1440,440 L1440,500 Z" fill="rgba(14,26,20,0.95)"/>
+      <!-- Mist line -->
+      <path d="M0,350 Q200,320 400,340 Q600,360 800,330 Q1000,300 1200,330 Q1320,345 1440,320 L1440,380 Q1200,400 1000,370 Q800,340 600,370 Q400,400 200,380 Q100,370 0,390 Z" fill="rgba(139,168,152,0.06)"/>
+    </svg>
+  </div>
+
   <div class="hero-content">
     <p class="hero-eyebrow">Nuwara Eliya · Sri Lanka</p>
-    <h1>Mount Edge Hotel</h1>
-    <p class="hero-sub" style="color:#f5e6c8;">Your peaceful retreat in the mist-draped hills of Sri Lanka's Little England.</p>
+    <h1 class="hero-title">
+      Mount Edge<em>Hotel</em>
+    </h1>
+    <p class="hero-sub">Your peaceful retreat in the mist-draped hills of Sri Lanka's Little England</p>
     <div class="hero-ctas">
-      <a href="booking/" class="btn btn-gold">Book Your Stay</a>
-      <a href="rooms/" class="btn btn-outline">View Rooms</a>
+      <a href="booking/" class="btn-gold-3d">Book Your Stay</a>
+      <a href="rooms/" class="btn-outline-3d">View Rooms</a>
     </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
 <!-- AVAILABILITY BAR -->
-<div class="availability-bar">
+<div class="avail-bar">
   <form class="avail-form" onsubmit="return false;">
     <div class="avail-group">
       <label for="checkin">Check-in</label>
-      <input type="date" id="checkin" />
+      <input type="date" id="checkin"/>
     </div>
     <div class="avail-group">
       <label for="checkout">Check-out</label>
-      <input type="date" id="checkout" />
+      <input type="date" id="checkout"/>
     </div>
     <div class="avail-group">
       <label for="roomtype">Room Type</label>
@@ -95,233 +1011,255 @@
     </div>
     <div class="avail-group" style="flex:0;">
       <label>&nbsp;</label>
-      <button type="submit" class="btn btn-green" style="white-space:nowrap;">Check Availability</button>
+      <button type="submit" class="btn-check">Check Availability</button>
     </div>
   </form>
 </div>
 
 <!-- WELCOME -->
-<section style="background: var(--cream);">
+<section class="welcome">
   <div class="welcome-split">
-    <div class="welcome-img-wrap">
-      <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="Mount Edge Hotel exterior" loading="lazy" />
-      <div class="welcome-badge">
-        <span class="big">360</span>
-        <span class="small">Surrounding vista</span>
+    <div class="welcome-img-wrap reveal">
+      <div class="tilt-card" id="tilt-img">
+        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80" alt="Mount Edge Hotel"/>
+        <div class="welcome-badge">
+          <span class="big">360°</span>
+          <span class="small">Surrounding Vista</span>
+        </div>
       </div>
     </div>
-    <div>
+    <div class="welcome-text reveal reveal-delay-2">
       <span class="section-label">Welcome</span>
       <h2 class="section-title">A Tranquil Escape in <em>Sri Lanka's</em> Hill Country</h2>
       <div class="section-line"></div>
-      <p>Nestled in the heart of Nuwara Eliya, Mount Edge Hotel offers a serene haven for travelers seeking the beauty of Sri Lanka's central highlands. Surrounded by lush tea plantations, misty mountains, and cool refreshing air, our hotel provides the perfect base for exploring the wonders of the hill country.</p>
-      <p style="margin-top:1rem;">Whether you're a couple on a romantic getaway, a family on holiday, or a solo traveler seeking peace, we welcome you with comfortable rooms, friendly service, and an unforgettable atmosphere.</p>
-      <div class="welcome-features">
+      <p>Nestled in the heart of Nuwara Eliya, Mount Edge Hotel offers a serene haven for travelers seeking the beauty of Sri Lanka's central highlands. Surrounded by lush tea plantations, misty mountains, and cool refreshing air.</p>
+      <p>Whether you're a couple on a romantic getaway, a family on holiday, or a solo traveler seeking peace, we welcome you with comfortable rooms, friendly service, and an unforgettable atmosphere.</p>
+      <div class="features-grid">
         <div class="feat-item"><span class="feat-icon">⛰️</span><div><h4>Mountain Views</h4><p>Wake up to breathtaking misty mountain scenery every morning.</p></div></div>
         <div class="feat-item"><span class="feat-icon">♡</span><div><h4>Family Friendly</h4><p>Spacious rooms and a safe garden for families with children.</p></div></div>
         <div class="feat-item"><span class="feat-icon">★</span><div><h4>Warm Hospitality</h4><p>Genuine Sri Lankan warmth from our dedicated family team.</p></div></div>
         <div class="feat-item"><span class="feat-icon">🍃</span><div><h4>Tea Country</h4><p>Surrounded by world-renowned Ceylon tea estates.</p></div></div>
       </div>
-      <div style="margin-top:2.5rem;">
-        <a href="about/" class="btn btn-dark">Learn More About Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section class="rooms-section" id="rooms">
+  <span class="section-label reveal">Accommodation</span>
+  <h2 class="section-title reveal">Our <em>Rooms</em></h2>
+  <div class="section-line reveal" style="margin: 2rem auto;"></div>
+  <p class="reveal" style="max-width:500px; margin: 0 auto 3rem; font-size:0.8rem; color:rgba(245,239,230,0.5); line-height:1.8; letter-spacing:0.05em;">Choose from our comfortable Single, Double, and Triple rooms — each designed for a restful stay in the hills.</p>
+  <div class="rooms-3d-container">
+    <div class="rooms-grid">
+      <div class="room-card-3d reveal">
+        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="Single Room"/>
+        <div class="room-img-overlay"></div>
+        <div class="room-body">
+          <h3>Single Room</h3>
+          <p>Ideal for solo travelers seeking a cozy and peaceful retreat with all essential comforts.</p>
+          <div class="room-price-tag">
+            <span class="price-from">From</span>
+            <span class="price-amount">Rs. 12,000</span>
+            <span class="price-per">/ night</span>
+          </div>
+          <div class="amenity-tags">
+            <span class="amenity-tag">Free Wi-Fi</span>
+            <span class="amenity-tag">Hot Water</span>
+            <span class="amenity-tag">Mountain View</span>
+          </div>
+          <a href="booking/?type=Single" class="btn-room">Book Single</a>
+        </div>
+      </div>
+      <div class="room-card-3d reveal reveal-delay-1">
+        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80" alt="Double Room"/>
+        <div class="room-img-overlay"></div>
+        <div class="room-body">
+          <h3>Double Room</h3>
+          <p>Perfect for couples looking for a romantic hill country escape with beautiful views.</p>
+          <div class="room-price-tag">
+            <span class="price-from">From</span>
+            <span class="price-amount">Rs. 15,500</span>
+            <span class="price-per">/ night</span>
+          </div>
+          <div class="amenity-tags">
+            <span class="amenity-tag">Free Wi-Fi</span>
+            <span class="amenity-tag">Hot Water</span>
+            <span class="amenity-tag">Tea View</span>
+          </div>
+          <a href="booking/?type=Double" class="btn-room">Book Double</a>
+        </div>
+      </div>
+      <div class="room-card-3d reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80" alt="Triple Room"/>
+        <div class="room-img-overlay"></div>
+        <div class="room-body">
+          <h3>Triple Room</h3>
+          <p>Great for families and small groups, with extra space and welcoming garden access.</p>
+          <div class="room-price-tag">
+            <span class="price-from">From</span>
+            <span class="price-amount">Rs. 18,000</span>
+            <span class="price-per">/ night</span>
+          </div>
+          <div class="amenity-tags">
+            <span class="amenity-tag">Free Wi-Fi</span>
+            <span class="amenity-tag">Hot Water</span>
+            <span class="amenity-tag">Garden Access</span>
+          </div>
+          <a href="booking/?type=Triple" class="btn-room">Book Triple</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ROOMS PREVIEW -->
-<section style="background: var(--mist);">
-  <div class="container text-center">
-    <span class="section-label">Accommodation</span>
-    <h2 class="section-title">Our <em>Rooms</em></h2>
-    <div class="section-line"></div>
-    <p style="max-width:560px; margin: 0 auto 3rem;">Choose from our comfortable Single, Double, and Triple rooms — each designed for a restful stay in the hills.</p>
-    <div class="rooms-grid">
-      <div class="room-card">
-        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="Single Room" loading="lazy" />
-        <div class="room-card-body">
-          <h3>Single Room</h3>
-          <p>Ideal for solo travelers seeking a cozy and peaceful retreat with all essential comforts.</p>
-          <div class="room-price">
-            <span class="price-from">From</span>
-            <span class="price-amount">Rs. 12,000</span>
-            <span class="price-per">/ night</span>
-          </div>
-          <div class="room-amenities">
-            <span class="amenity-tag">Free Wi-Fi</span>
-            <span class="amenity-tag">Hot Water</span>
-            <span class="amenity-tag">Mountain View</span>
-          </div>
-          <a href="booking/?type=Single" class="btn btn-gold">Book Single</a>
-        </div>
-      </div>
-      <div class="room-card">
-        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80" alt="Double Room" loading="lazy" />
-        <div class="room-card-body">
-          <h3>Double Room</h3>
-          <p>Perfect for couples looking for a romantic hill country escape with beautiful views.</p>
-          <div class="room-price">
-            <span class="price-from">From</span>
-            <span class="price-amount">Rs. 15,500</span>
-            <span class="price-per">/ night</span>
-          </div>
-          <div class="room-amenities">
-            <span class="amenity-tag">Free Wi-Fi</span>
-            <span class="amenity-tag">Hot Water</span>
-            <span class="amenity-tag">Tea Plantation View</span>
-          </div>
-          <a href="booking/?type=Double" class="btn btn-gold">Book Double</a>
-        </div>
-      </div>
-      <div class="room-card">
-        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80" alt="Triple Room" loading="lazy" />
-        <div class="room-card-body">
-          <h3>Triple Room</h3>
-          <p>Great for families and small groups, with extra space and a welcoming garden access.</p>
-          <div class="room-price">
-            <span class="price-from">From</span>
-            <span class="price-amount">Rs. 18,000</span>
-            <span class="price-per">/ night</span>
-          </div>
-          <div class="room-amenities">
-            <span class="amenity-tag">Free Wi-Fi</span>
-            <span class="amenity-tag">Hot Water</span>
-            <span class="amenity-tag">Garden Access</span>
-          </div>
-          <a href="booking/?type=Triple" class="btn btn-gold">Book Triple</a>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:3rem;">
-      <a href="rooms/" class="btn btn-dark">View All Rooms</a>
-    </div>
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item reveal"><span class="stat-number" data-target="360">0</span><span class="stat-label">Degree Views</span></div>
+    <div class="stat-item reveal reveal-delay-1"><span class="stat-number" data-target="24">0</span><span class="stat-label">Hour Reception</span></div>
+    <div class="stat-item reveal reveal-delay-2"><span class="stat-number" data-target="3">0</span><span class="stat-label">Room Types</span></div>
+    <div class="stat-item reveal reveal-delay-3"><span class="stat-number" data-target="5">0</span><span class="stat-label">Nearby Attractions</span></div>
   </div>
 </section>
 
 <!-- PRICING -->
 <section class="pricing-section">
-  <div class="container text-center">
-    <span class="section-label" style="color: var(--gold-light);">Room Rates</span>
-    <h2 class="section-title">Transparent <em>Pricing</em></h2>
-    <div class="section-line"></div>
-    <p>Flexible meal plans to suit every type of traveler.</p>
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <h3>Single Room</h3>
-        <p class="pricing-type">Ideal for solo travelers</p>
-        <div class="price-row"><span>Room Only</span><span>Rs. 12,000</span></div>
-        <div class="price-row"><span>Half Board</span><span>Rs. 15,000</span></div>
-        <div class="price-row"><span>Full Board</span><span>Rs. 18,000</span></div>
-        <div style="margin-top:1.5rem;"><a href="booking/?type=Single" class="btn btn-gold" style="width:100%;display:block;text-align:center;">Book Single</a></div>
-      </div>
-      <div class="pricing-card featured">
-        <h3>Double Room</h3>
-        <p class="pricing-type">Perfect for couples</p>
-        <div class="price-row"><span>Room Only</span><span>Rs. 15,500</span></div>
-        <div class="price-row"><span>Half Board</span><span>Rs. 18,500</span></div>
-        <div class="price-row"><span>Full Board</span><span>Rs. 24,500</span></div>
-        <div style="margin-top:1.5rem;"><a href="booking/?type=Double" class="btn btn-gold" style="width:100%;display:block;text-align:center;">Book Double</a></div>
-      </div>
-      <div class="pricing-card">
-        <h3>Triple Room</h3>
-        <p class="pricing-type">Great for families</p>
-        <div class="price-row"><span>Room Only</span><span>Rs. 18,000</span></div>
-        <div class="price-row"><span>Half Board</span><span>Rs. 22,500</span></div>
-        <div class="price-row"><span>Full Board</span><span>Rs. 26,500</span></div>
-        <div style="margin-top:1.5rem;"><a href="booking/?type=Triple" class="btn btn-gold" style="width:100%;display:block;text-align:center;">Book Triple</a></div>
-      </div>
+  <span class="section-label reveal" style="display:block; text-align:center;">Room Rates</span>
+  <h2 class="section-title reveal" style="text-align:center;">Transparent <em>Pricing</em></h2>
+  <div class="section-line reveal" style="margin: 2rem auto;"></div>
+  <p class="reveal" style="text-align:center; font-size:0.75rem; color:rgba(245,239,230,0.4); letter-spacing:0.1em;">Flexible meal plans to suit every type of traveler.</p>
+  <div class="pricing-grid">
+    <div class="pricing-card reveal">
+      <h3>Single Room</h3>
+      <span class="pricing-type">Ideal for solo travelers</span>
+      <div class="price-row"><span>Room Only</span><span>Rs. 12,000</span></div>
+      <div class="price-row"><span>Half Board</span><span>Rs. 15,000</span></div>
+      <div class="price-row"><span>Full Board</span><span>Rs. 18,000</span></div>
+      <a href="booking/?type=Single" class="btn-pricing">Book Single</a>
+    </div>
+    <div class="pricing-card featured reveal reveal-delay-1">
+      <h3>Double Room</h3>
+      <span class="pricing-type">Perfect for couples</span>
+      <div class="price-row"><span>Room Only</span><span>Rs. 15,500</span></div>
+      <div class="price-row"><span>Half Board</span><span>Rs. 18,500</span></div>
+      <div class="price-row"><span>Full Board</span><span>Rs. 24,500</span></div>
+      <a href="booking/?type=Double" class="btn-pricing">Book Double</a>
+    </div>
+    <div class="pricing-card reveal reveal-delay-2">
+      <h3>Triple Room</h3>
+      <span class="pricing-type">Great for families</span>
+      <div class="price-row"><span>Room Only</span><span>Rs. 18,000</span></div>
+      <div class="price-row"><span>Half Board</span><span>Rs. 22,500</span></div>
+      <div class="price-row"><span>Full Board</span><span>Rs. 26,500</span></div>
+      <a href="booking/?type=Triple" class="btn-pricing">Book Triple</a>
     </div>
   </div>
 </section>
 
-<!-- FACILITIES PREVIEW -->
-<section style="background: var(--white);">
-  <div class="container text-center">
-    <span class="section-label">Amenities</span>
-    <h2 class="section-title">Our <em>Facilities</em></h2>
-    <div class="section-line"></div>
-    <div class="facilities-grid">
-      <div class="facility-item"><div class="facility-icon">📶</div><h4>Free Wi-Fi</h4><p>High-speed internet throughout the hotel.</p></div>
-      <div class="facility-item"><div class="facility-icon">🛁</div><h4>Attached Bathroom</h4><p>Private bathroom with hot water in every room.</p></div>
-      <div class="facility-item"><div class="facility-icon">🍴</div><h4>Dining Options</h4><p>Sri Lankan &amp; international cuisine, flexible meal plans.</p></div>
-      <div class="facility-item"><div class="facility-icon">🚗</div><h4>Free Parking</h4><p>Secure parking for all guests at no extra charge.</p></div>
-      <div class="facility-item"><div class="facility-icon">🌳</div><h4>Garden &amp; Views</h4><p>Beautiful garden with stunning mountain scenery.</p></div>
-      <div class="facility-item"><div class="facility-icon">👤</div><h4>24/7 Reception</h4><p>Our friendly staff is always here for you.</p></div>
-    </div>
-    <div style="margin-top:3rem;"><a href="facilities/" class="btn btn-dark">View All Facilities</a></div>
+<!-- FACILITIES -->
+<section class="facilities-section" id="facilities">
+  <span class="section-label reveal">Amenities</span>
+  <h2 class="section-title reveal">Our <em>Facilities</em></h2>
+  <div class="section-line reveal" style="margin: 2rem auto;"></div>
+  <div class="facilities-grid">
+    <div class="facility-card reveal"><span class="facility-icon">📶</span><h4>Free Wi-Fi</h4><p>High-speed internet throughout the hotel.</p></div>
+    <div class="facility-card reveal reveal-delay-1"><span class="facility-icon">🛁</span><h4>Attached Bathroom</h4><p>Private bathroom with hot water in every room.</p></div>
+    <div class="facility-card reveal reveal-delay-2"><span class="facility-icon">🍴</span><h4>Dining Options</h4><p>Sri Lankan & international cuisine with flexible meal plans.</p></div>
+    <div class="facility-card reveal reveal-delay-3"><span class="facility-icon">🚗</span><h4>Free Parking</h4><p>Secure parking for all guests at no extra charge.</p></div>
+    <div class="facility-card reveal reveal-delay-1"><span class="facility-icon">🌳</span><h4>Garden & Views</h4><p>Beautiful garden with stunning mountain scenery.</p></div>
+    <div class="facility-card reveal reveal-delay-2"><span class="facility-icon">👤</span><h4>24/7 Reception</h4><p>Our friendly staff is always here for you.</p></div>
   </div>
 </section>
-
-<!-- TESTIMONIALS -->
-<!--
-<section class="testimonials-section">
-  <div class="container text-center">
-    <span class="section-label">Guest Reviews</span>
-    <h2 class="section-title">What Our <em>Guests Say</em></h2>
-    <div class="section-line"></div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Absolutely magical stay. Waking up to those misty mountain views every morning was unforgettable. The staff treated us like family."</blockquote>
-        <div class="reviewer"><div class="reviewer-avatar">A</div><div><div class="reviewer-name">Anisha Perera</div><div class="reviewer-loc">Colombo, Sri Lanka</div></div></div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Best value hotel in Nuwara Eliya by far. Clean rooms, incredible food, and the location near the tea plantations is just stunning."</blockquote>
-        <div class="reviewer"><div class="reviewer-avatar">R</div><div><div class="reviewer-name">Rajan Krishnamurthy</div><div class="reviewer-loc">Chennai, India</div></div></div>
-      </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★☆</div>
-        <blockquote>"A hidden gem in the hills. The garden is beautiful and the owners are incredibly warm and welcoming. We'll definitely be back."</blockquote>
-        <div class="reviewer"><div class="reviewer-avatar">S</div><div><div class="reviewer-name">Sarah Mitchell</div><div class="reviewer-loc">London, UK</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>-->
 
 <!-- ATTRACTIONS -->
-<section style="background: var(--cream);">
-  <div class="container text-center">
-    <span class="section-label">Explore</span>
-    <h2 class="section-title">Discover <em>Nuwara Eliya</em></h2>
-    <div class="section-line"></div>
-    <p style="max-width:560px; margin: 0 auto 3rem;">Enchanting attractions just minutes from your door.</p>
-    <div class="attractions-grid">
-      <div class="attraction-item"><img src="https://images.unsplash.com/photo-1606185540834-d6d8291e46b5?w=600&q=80" alt="Tea Plantations" loading="lazy" /><div class="attraction-overlay"><div class="icon">🍃</div><h4>Tea Plantations</h4><span>5 km away</span></div></div>
-      <div class="attraction-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Gregory Lake" loading="lazy" /><div class="attraction-overlay"><div class="icon">🌊</div><h4>Gregory Lake</h4><span>3 km away</span></div></div>
-      <div class="attraction-item"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" alt="Horton Plains" loading="lazy" /><div class="attraction-overlay"><div class="icon">⛰️</div><h4>Horton Plains</h4><span>30 km away</span></div></div>
-      <div class="attraction-item"><img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80" alt="Hakgala Gardens" loading="lazy" /><div class="attraction-overlay"><div class="icon">🌸</div><h4>Hakgala Gardens</h4><span>8 km away</span></div></div>
+<section class="attractions-section" id="attractions">
+  <span class="section-label reveal">Explore</span>
+  <h2 class="section-title reveal">Discover <em>Nuwara Eliya</em></h2>
+  <div class="section-line reveal" style="margin: 2rem auto;"></div>
+  <div class="attractions-grid">
+    <div class="attraction-card reveal">
+      <img src="https://images.unsplash.com/photo-1606185540834-d6d8291e46b5?w=600&q=80" alt="Tea Plantations"/>
+      <div class="attraction-overlay">
+        <span class="attraction-icon">🍃</span>
+        <h4>Tea Plantations</h4>
+        <span class="attraction-dist">5 km away</span>
+        <p class="attraction-desc">Wander through emerald rows of world-famous Ceylon tea estates stretching across misty hillsides.</p>
+      </div>
+    </div>
+    <div class="attraction-card reveal reveal-delay-1">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Gregory Lake"/>
+      <div class="attraction-overlay">
+        <span class="attraction-icon">🌊</span>
+        <h4>Gregory Lake</h4>
+        <span class="attraction-dist">3 km away</span>
+        <p class="attraction-desc">A serene colonial-era reservoir perfect for boating, walking, and watching the sunset.</p>
+      </div>
+    </div>
+    <div class="attraction-card reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&q=80" alt="Horton Plains"/>
+      <div class="attraction-overlay">
+        <span class="attraction-icon">⛰️</span>
+        <h4>Horton Plains</h4>
+        <span class="attraction-dist">30 km away</span>
+        <p class="attraction-desc">Trek to World's End, a dramatic sheer cliff offering breathtaking views over the southern plains.</p>
+      </div>
+    </div>
+    <div class="attraction-card reveal reveal-delay-3">
+      <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80" alt="Hakgala Gardens"/>
+      <div class="attraction-overlay">
+        <span class="attraction-icon">🌸</span>
+        <h4>Hakgala Gardens</h4>
+        <span class="attraction-dist">8 km away</span>
+        <p class="attraction-desc">A stunning botanical garden nestled at 1,745m with rare alpine flora and mountain deer.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="faq-section">
-  <div class="container" style="max-width:900px;">
-    <span class="section-label">Help</span>
-    <h2 class="section-title">Frequently Asked <em>Questions</em></h2>
-    <div class="section-line"></div>
-    <div class="faq-list">
-      <div class="faq-item"><button class="faq-q">What are the check-in and check-out times?<span class="faq-icon">+</span></button><div class="faq-a"><p>Check-in is from 2:00 PM and check-out is by 11:00 AM. Early check-in and late check-out may be arranged on request, subject to availability.</p></div></div>
-      <div class="faq-item"><button class="faq-q">What meal plans are available?<span class="faq-icon">+</span></button><div class="faq-a"><p>We offer Room Only, Half Board (breakfast &amp; dinner), and Full Board (breakfast, lunch &amp; dinner). Choose your plan at the time of booking.</p></div></div>
-      <div class="faq-item"><button class="faq-q">Is parking available?<span class="faq-icon">+</span></button><div class="faq-a"><p>Yes, free secure parking is available for all guests within the hotel premises.</p></div></div>
-      <div class="faq-item"><button class="faq-q">How far is the hotel from Nuwara Eliya town?<span class="faq-icon">+</span></button><div class="faq-a"><p>We're located in Blackpool, approximately 2 km from the town center. Local tuk-tuks and transport are readily available.</p></div></div>
-      <div class="faq-item"><button class="faq-q">Do you offer airport transfers?<span class="faq-icon">+</span></button><div class="faq-a"><p>Yes, we can arrange transfers from Bandaranaike International Airport or any location in Sri Lanka. Contact us in advance to arrange this.</p></div></div>
-      <div class="faq-item"><button class="faq-q">What is the cancellation policy?<span class="faq-icon">+</span></button><div class="faq-a"><p>Cancellations 48+ hours before check-in receive a full refund. Within 48 hours, one night's stay is charged. No-shows are charged the full booking amount.</p></div></div>
+<section class="faq-section" id="faq">
+  <div style="max-width:900px; margin:0 auto;">
+    <span class="section-label reveal">Help</span>
+    <h2 class="section-title reveal">Frequently Asked <em>Questions</em></h2>
+    <div class="section-line reveal"></div>
+    <div class="faq-inner">
+      <div class="faq-item reveal">
+        <button class="faq-q">What are the check-in and check-out times? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Check-in is from 2:00 PM and check-out is by 11:00 AM. Early check-in and late check-out may be arranged on request, subject to availability.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">What meal plans are available? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>We offer Room Only, Half Board (breakfast & dinner), and Full Board (breakfast, lunch & dinner). Choose your plan at the time of booking.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Is parking available? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Yes, free secure parking is available for all guests within the hotel premises.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">How far is the hotel from Nuwara Eliya town? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>We're located in Blackpool, approximately 2 km from the town center. Local tuk-tuks and transport are readily available.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">Do you offer airport transfers? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Yes, we can arrange transfers from Bandaranaike International Airport or any location in Sri Lanka. Contact us in advance to arrange this.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">What is the cancellation policy? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Cancellations 48+ hours before check-in receive a full refund. Within 48 hours, one night's stay is charged. No-shows are charged the full booking amount.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- NEWSLETTER -->
 <section class="newsletter-section">
-  <div class="container">
-    <h2>Stay <em style="color:var(--gold-light);">Updated</em></h2>
-    <p>Subscribe for special offers, travel tips, and news from the hills of Nuwara Eliya.</p>
-    <form class="newsletter-form" onsubmit="return false;">
-      <input type="email" placeholder="Your email address" />
-      <button type="submit">Subscribe</button>
-    </form>
-  </div>
+  <h2>Stay <em style="color:var(--gold-light);">Updated</em></h2>
+  <p>Subscribe for special offers, travel tips, and news from the hills of Nuwara Eliya.</p>
+  <form class="newsletter-form" onsubmit="return false;">
+    <input type="email" placeholder="Your email address"/>
+    <button type="submit">Subscribe</button>
+  </form>
 </section>
 
 <!-- FOOTER -->
@@ -340,13 +1278,12 @@
         <li><a href="gallery/">Gallery</a></li>
         <li><a href="about/">About Us</a></li>
         <li><a href="contact/">Contact</a></li>
-        <li><a href="booking/">Book Now</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Legal</h4>
       <ul>
-        <li><a href="terms/">Terms &amp; Conditions</a></li>
+        <li><a href="terms/">Terms & Conditions</a></li>
         <li><a href="terms/#cancellation">Cancellation Policy</a></li>
         <li><a href="terms/#privacy">Privacy Policy</a></li>
       </ul>
@@ -364,8 +1301,328 @@
   </div>
 </footer>
 
-<button class="scroll-top">↑</button>
-<script src="main.js"></script>
-<script src="mountedge-enhancements.js"></script>
+<button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ============ CUSTOM CURSOR ============
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+function animateCursor() {
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+document.querySelectorAll('a, button, .room-card-3d, .facility-card, .attraction-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.width='14px'; cursor.style.height='14px'; cursorRing.style.width='50px'; cursorRing.style.height='50px'; });
+  el.addEventListener('mouseleave', () => { cursor.style.width='8px'; cursor.style.height='8px'; cursorRing.style.width='36px'; cursorRing.style.height='36px'; });
+});
+
+// ============ GLOBAL SWIRLING PARTICLE SYSTEM ============
+// Particles swirl freely around the whole page.
+// When cursor is still for 300ms → they get attracted toward cursor and gather.
+// When cursor moves again → they scatter back into free swirl.
+(function() {
+  const gc = document.getElementById('global-particles');
+  const gx = gc.getContext('2d');
+  let W = window.innerWidth, H = window.innerHeight;
+  gc.width = W; gc.height = H;
+  window.addEventListener('resize', () => {
+    W = window.innerWidth; H = window.innerHeight;
+    gc.width = W; gc.height = H;
+  });
+
+  const PARTICLE_COUNT = 180;
+  const GOLD = [201, 168, 76];
+  const SILVER = [245, 239, 230];
+  const MIST = [139, 168, 152];
+
+  let gMouseX = W / 2, gMouseY = H / 2;
+  let mouseStillTimer = null;
+  let attracting = false;
+  let attractStrength = 0; // 0 = free swirl, 1 = full attraction
+
+  document.addEventListener('mousemove', e => {
+    gMouseX = e.clientX;
+    gMouseY = e.clientY + window.scrollY; // account for scroll
+    attracting = false;
+    if (mouseStillTimer) clearTimeout(mouseStillTimer);
+    mouseStillTimer = setTimeout(() => { attracting = true; }, 300);
+  });
+
+  // Smooth attraction transition
+  let attrT = 0;
+
+  class GlobalParticle {
+    constructor() { this.reset(true); }
+    reset(randomPos = false) {
+      this.x = randomPos ? Math.random() * W : W / 2 + (Math.random() - 0.5) * 100;
+      this.y = randomPos ? Math.random() * H * 3 : H / 2 + (Math.random() - 0.5) * 100;
+      // orbital swirl params
+      this.orbitX = Math.random() * W;
+      this.orbitY = Math.random() * H * 3;
+      this.orbitR = Math.random() * 180 + 40;
+      this.orbitSpeed = (Math.random() * 0.008 + 0.002) * (Math.random() < 0.5 ? 1 : -1);
+      this.orbitAngle = Math.random() * Math.PI * 2;
+      this.orbitDrift = { x: (Math.random() - 0.5) * 0.3, y: (Math.random() - 0.5) * 0.15 };
+      // visual
+      const colorSet = [GOLD, SILVER, MIST];
+      this.color = colorSet[Math.floor(Math.random() * colorSet.length)];
+      this.r = Math.random() * 1.8 + 0.4;
+      this.baseOpacity = Math.random() * 0.5 + 0.1;
+      this.opacity = this.baseOpacity;
+      this.twinklePhase = Math.random() * Math.PI * 2;
+      this.twinkleSpeed = Math.random() * 0.04 + 0.01;
+      // velocity for scatter effect
+      this.vx = 0; this.vy = 0;
+    }
+  }
+
+  const gParticles = Array.from({ length: PARTICLE_COUNT }, () => new GlobalParticle());
+  let gT = 0;
+
+  function drawGlobal() {
+    gx.clearRect(0, 0, W, H);
+
+    // Smooth attraction blend
+    const targetAttr = attracting ? 1 : 0;
+    attrT += (targetAttr - attrT) * 0.025;
+
+    const scrollY = window.scrollY;
+    const cursorPageY = gMouseY; // already page coords
+
+    gT += 0.016;
+    gParticles.forEach((p, i) => {
+      // Update orbital position (free swirl)
+      p.orbitAngle += p.orbitSpeed;
+      p.orbitX += p.orbitDrift.x;
+      p.orbitY += p.orbitDrift.y;
+
+      // Wrap orbit centers
+      if (p.orbitX < -200) p.orbitX = W + 200;
+      if (p.orbitX > W + 200) p.orbitX = -200;
+      if (p.orbitY < -200) p.orbitY = H * 3 + 200;
+      if (p.orbitY > H * 3 + 200) p.orbitY = -200;
+
+      const freeX = p.orbitX + Math.cos(p.orbitAngle) * p.orbitR;
+      const freeY = p.orbitY + Math.sin(p.orbitAngle) * p.orbitR * 0.5;
+
+      // Attraction target (cursor in screen coords)
+      const screenCursorY = cursorPageY - scrollY;
+      const attractX = gMouseX + (Math.sin(gT * 2 + i) * 15 * (1 - attrT));
+      const attractY = screenCursorY + (Math.cos(gT * 2 + i * 0.7) * 10 * (1 - attrT));
+
+      // Blend between free and attracted
+      // For screen-space rendering, convert freeY to screen coords
+      const freeScreenY = freeY - scrollY;
+
+      p.x += ((freeX * (1 - attrT) + attractX * attrT) - p.x) * 0.06;
+      p.y += ((freeScreenY * (1 - attrT) + attractY * attrT) - p.y) * 0.06;
+
+      // Opacity — glow up when attracting
+      const twinkle = Math.sin(gT * p.twinkleSpeed * 60 + p.twinklePhase) * 0.25 + 0.75;
+      const glowBoost = attrT * 0.4;
+      p.opacity = (p.baseOpacity + glowBoost) * twinkle;
+
+      // Only draw if on screen
+      if (p.y < -20 || p.y > H + 20) return;
+
+      const [r, g, b] = p.color;
+      const radius = p.r * (1 + attrT * 0.8);
+
+      // Glow halo when attracting
+      if (attrT > 0.1) {
+        const glow = gx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius * 6);
+        glow.addColorStop(0, `rgba(${r},${g},${b},${p.opacity * attrT * 0.5})`);
+        glow.addColorStop(1, `rgba(${r},${g},${b},0)`);
+        gx.beginPath();
+        gx.arc(p.x, p.y, radius * 6, 0, Math.PI * 2);
+        gx.fillStyle = glow;
+        gx.fill();
+      }
+
+      // Core dot
+      gx.beginPath();
+      gx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+      gx.fillStyle = `rgba(${r},${g},${b},${Math.min(p.opacity, 0.9)})`;
+      gx.fill();
+
+      // Connection lines between nearby attracted particles
+      if (attrT > 0.5) {
+        for (let j = i + 1; j < Math.min(i + 8, gParticles.length); j++) {
+          const q = gParticles[j];
+          const dx = p.x - q.x, dy = p.y - q.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 60) {
+            const lineAlpha = (1 - dist / 60) * attrT * 0.25;
+            gx.beginPath();
+            gx.moveTo(p.x, p.y);
+            gx.lineTo(q.x, q.y);
+            gx.strokeStyle = `rgba(${r},${g},${b},${lineAlpha})`;
+            gx.lineWidth = 0.5;
+            gx.stroke();
+          }
+        }
+      }
+    });
+
+    requestAnimationFrame(drawGlobal);
+  }
+  drawGlobal();
+})();
+
+// ============ HERO CANVAS (star field) ============
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
+let stars = [];
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+for (let i = 0; i < 200; i++) {
+  stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height*0.6,
+    r: Math.random()*1.2+0.2, opacity: Math.random()*0.6+0.1,
+    twinkleSpeed: Math.random()*0.02+0.005, twinklePhase: Math.random()*Math.PI*2 });
+}
+let heroMouseX = 0, heroMouseY = 0;
+document.getElementById('hero').addEventListener('mousemove', e => {
+  heroMouseX = (e.clientX/window.innerWidth-0.5)*2;
+  heroMouseY = (e.clientY/window.innerHeight-0.5)*2;
+});
+let t = 0;
+function drawStars() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const grad = ctx.createLinearGradient(0,0,0,canvas.height);
+  grad.addColorStop(0,'#060e09'); grad.addColorStop(0.5,'#0e1a14'); grad.addColorStop(1,'#1a2e20');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,canvas.width,canvas.height);
+  const auroraGrad = ctx.createRadialGradient(canvas.width*(0.5+heroMouseX*0.1),canvas.height*0.3,0,canvas.width*0.5,canvas.height*0.3,canvas.width*0.6);
+  auroraGrad.addColorStop(0,'rgba(139,168,152,0.04)'); auroraGrad.addColorStop(0.5,'rgba(201,168,76,0.02)'); auroraGrad.addColorStop(1,'transparent');
+  ctx.fillStyle = auroraGrad; ctx.fillRect(0,0,canvas.width,canvas.height);
+  t += 0.016;
+  stars.forEach(s => {
+    const twinkle = Math.sin(t*s.twinkleSpeed*60+s.twinklePhase)*0.3+0.7;
+    ctx.beginPath();
+    ctx.arc(s.x+heroMouseX*s.r*3, s.y+heroMouseY*s.r*2, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(245,239,230,${s.opacity*twinkle})`; ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// ============ MIST BLOBS ============
+const mistContainer = document.getElementById('mist');
+const mistColors = ['rgba(139,168,152,1)','rgba(26,46,32,1)','rgba(201,168,76,0.3)'];
+for (let i=0; i<8; i++) {
+  const blob = document.createElement('div'); blob.className = 'mist-blob';
+  const size = Math.random()*300+200;
+  blob.style.cssText = `width:${size}px;height:${size*0.5}px;background:${mistColors[Math.floor(Math.random()*mistColors.length)]};top:${Math.random()*60+20}%;left:-20%;animation-duration:${Math.random()*20+25}s;animation-delay:${Math.random()*-30}s;`;
+  mistContainer.appendChild(blob);
+}
+
+// ============ PARTICLES (hero) ============
+const particlesContainer = document.getElementById('particles');
+for (let i=0; i<30; i++) {
+  const p = document.createElement('div'); p.className = 'particle';
+  p.style.cssText = `left:${Math.random()*100}%;animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*-20}s;--drift:${(Math.random()-0.5)*100}px;width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;`;
+  particlesContainer.appendChild(p);
+}
+
+// ============ PARALLAX HERO ============
+const heroContent = document.querySelector('.hero-content');
+const mountainScene = document.querySelector('.mountain-scene');
+window.addEventListener('scroll', () => {
+  const sy = window.scrollY;
+  if (heroContent) heroContent.style.transform = `translateY(${sy*0.3}px)`;
+  if (mountainScene) mountainScene.style.transform = `translateY(${sy*0.15}px)`;
+});
+
+// ============ NAV SCROLL ============
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+  document.getElementById('scrollTopBtn').classList.toggle('visible', window.scrollY > 400);
+});
+
+// ============ TILT CARD ============
+const tiltCard = document.getElementById('tilt-img');
+if (tiltCard) {
+  const wrap = tiltCard.parentElement;
+  wrap.addEventListener('mousemove', e => {
+    const rect = wrap.getBoundingClientRect();
+    const cx = (e.clientX-rect.left)/rect.width-0.5;
+    const cy = (e.clientY-rect.top)/rect.height-0.5;
+    tiltCard.style.transform = `rotateY(${cx*15}deg) rotateX(${-cy*10}deg) translateZ(10px)`;
+  });
+  wrap.addEventListener('mouseleave', () => { tiltCard.style.transform = 'rotateY(0) rotateX(0) translateZ(0)'; });
+}
+
+// ============ SCROLL REVEAL ============
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ============ COUNTER ANIMATION ============
+function animateCounter(el, target, duration=2000) {
+  let start = 0;
+  const step = (ts) => {
+    if (!start) start = ts;
+    const prog = Math.min((ts-start)/duration,1);
+    el.textContent = Math.floor((1-Math.pow(1-prog,3))*target);
+    if (prog < 1) requestAnimationFrame(step); else el.textContent = target;
+  };
+  requestAnimationFrame(step);
+}
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { animateCounter(e.target, parseInt(e.target.dataset.target)); counterObserver.unobserve(e.target); }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+// ============ FAQ ACCORDION ============
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ============ ROOM CARD 3D MOUSE ============
+document.querySelectorAll('.room-card-3d').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const cx = (e.clientX-rect.left)/rect.width-0.5;
+    const cy = (e.clientY-rect.top)/rect.height-0.5;
+    card.style.transform = `translateY(-15px) rotateX(${-cy*8}deg) rotateY(${cx*8}deg)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+
+// ============ SAFE BOOKING REDIRECT OVERRIDE ============
+document.querySelector('.avail-form')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const ci = document.getElementById('checkin')?.value || '';
+  const co = document.getElementById('checkout')?.value || '';
+  const rt = document.getElementById('roomtype')?.value || '';
+  if (!ci || !co) { alert('Please select check-in and check-out dates.'); return; }
+  const params = new URLSearchParams({ checkin: ci, checkout: co, type: rt });
+  window.location.href = 'booking/?' + params.toString();
+});
+
+// ============ AUTO FOOTER YEAR ============
+document.querySelectorAll('.footer-bottom span:first-child').forEach(el => {
+  el.textContent = `© ${new Date().getFullYear()} Mount Edge Hotel. All rights reserved.`;
+});
+
+</script>
 </body>
 </html>
