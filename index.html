@@ -24,8 +24,8 @@
       <a href="#home" class="active">Home</a>
       <a href="#rooms">Rooms</a>
       <a href="#experience">Experience</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#about">About</a>
+      <a href="#location">Location</a>
+      <a href="gallery.html">Gallery</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="book-btn js-book" type="button">Book your stay</button>
@@ -34,7 +34,7 @@
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <nav aria-label="Mobile navigation">
-      <a href="#home">Home</a><a href="#rooms">Rooms</a><a href="#experience">Experience</a><a href="#gallery">Gallery</a><a href="#about">About</a><a href="#contact">Contact</a>
+      <a href="#home">Home</a><a href="#rooms">Rooms</a><a href="#experience">Experience</a><a href="#location">Location</a><a href="gallery.html">Gallery</a><a href="#contact">Contact</a>
       <button class="btn btn-gold js-book" type="button">Book your stay</button>
     </nav>
     <p>Nuwara Eliya · Sri Lanka</p>
@@ -87,12 +87,24 @@
             <div class="room-overlay"><span>Guest favourite</span><h3>Double Room</h3><p>Bright, comfortable and ideal for two.</p><button class="text-link js-book" type="button">Check availability ↗</button></div>
           </article>
         </div>
-        <div class="room-rates reveal">
-          <div><span>Single room</span><strong>From Rs. 12,000</strong></div>
-          <div><span>Double room</span><strong>From Rs. 15,500</strong></div>
-          <div><span>Triple room</span><strong>From Rs. 18,000</strong></div>
-          <button class="btn btn-outline-dark js-book" type="button">Ask for your dates</button>
+        <div class="room-details-grid reveal" aria-label="Room features and starting rates">
+          <article class="room-detail">
+            <div class="room-detail-head"><span>01</span><div><h3>Single Room</h3><p>For solo travellers</p></div><strong>Rs. 12,000 <small>/ room only</small></strong></div>
+            <ul class="feature-chips"><li>Free Wi-Fi</li><li>Hot shower</li><li>Mountain view</li><li>Natural light</li><li>Toiletries</li><li>Tea / coffee</li></ul>
+            <button class="text-link js-book room-enquire" type="button" data-room="Single room">Enquire about Single Room ↗</button>
+          </article>
+          <article class="room-detail featured">
+            <div class="room-detail-head"><span>02</span><div><h3>Double Room</h3><p>For couples</p></div><strong>Rs. 15,500 <small>/ room only</small></strong></div>
+            <ul class="feature-chips"><li>Free Wi-Fi</li><li>En-suite bathroom</li><li>Tea-country view</li><li>Hot water</li><li>Seating area</li><li>Tea / coffee</li></ul>
+            <button class="text-link js-book room-enquire" type="button" data-room="Double room">Enquire about Double Room ↗</button>
+          </article>
+          <article class="room-detail">
+            <div class="room-detail-head"><span>03</span><div><h3>Triple Room</h3><p>For families & small groups</p></div><strong>Rs. 18,000 <small>/ room only</small></strong></div>
+            <ul class="feature-chips"><li>Free Wi-Fi</li><li>En-suite bathroom</li><li>Garden access</li><li>Family friendly</li><li>Hot water</li><li>Tea / coffee</li></ul>
+            <button class="text-link js-book room-enquire" type="button" data-room="Triple room">Enquire about Triple Room ↗</button>
+          </article>
         </div>
+        <p class="room-plan-note reveal">Half board and full board meal plans are also available. Ask us for the best option for your stay.</p>
       </div>
     </section>
 
@@ -115,7 +127,7 @@
       <div class="container">
         <div class="section-top reveal">
           <div><p class="kicker dark">A closer look</p><h2>The hotel,<br><em>as it is.</em></h2></div>
-          <p>Real photographs from Mount Edge — the building, rooms and spaces you will actually arrive to.</p>
+          <div><p>Real photographs from Mount Edge — the building, rooms and spaces you will actually arrive to.</p><a class="gallery-page-link" href="gallery.html">View full gallery ↗</a></div>
         </div>
         <div class="gallery-grid">
           <figure class="gallery-wide reveal"><img src="assets/hotel-exterior.webp" alt="Mount Edge Hotel exterior at dusk" loading="lazy"><figcaption>Mount Edge at dusk</figcaption></figure>
@@ -126,15 +138,61 @@
       </div>
     </section>
 
-    <section class="location section-pad">
-      <div class="container location-grid">
-        <div class="reveal"><p class="kicker">Hill-country base</p><h2>Close to the<br><em>places you came for.</em></h2></div>
-        <div class="nearby reveal delay-1">
-          <div><span>Approx. 2 km</span><strong>Nuwara Eliya town</strong></div>
-          <div><span>Approx. 3 km</span><strong>Gregory Lake</strong></div>
-          <div><span>Approx. 8 km</span><strong>Hakgala Gardens</strong></div>
-          <div><span>Day trip</span><strong>Horton Plains</strong></div>
+    <section class="location section-pad" id="location">
+      <div class="container">
+        <div class="location-intro reveal">
+          <div><p class="kicker">Find your way</p><h2>A calm base for<br><em>Nuwara Eliya.</em></h2></div>
+          <p>Set in Blackpool, Mount Edge gives you a quieter place to return to while keeping the town, lake, gardens and hill-country routes within easy reach.</p>
         </div>
+        <div class="location-experience">
+          <div class="map-card reveal">
+            <iframe title="Map showing Mount Edge Hotel in Blackpool, Nuwara Eliya" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=No.73%20Dharmapalapura%20Blackpool%20Nuwara%20Eliya%20Sri%20Lanka&output=embed"></iframe>
+            <div class="map-card-bar"><div><span class="meta-label">Mount Edge Hotel</span><strong>No.73, Dharmapalapura, Blackpool</strong></div><a href="https://www.google.com/maps/search/?api=1&query=No.73%20Dharmapalapura%20Blackpool%20Nuwara%20Eliya%20Sri%20Lanka" target="_blank" rel="noopener">Open directions ↗</a></div>
+          </div>
+          <div class="nearby reveal delay-1">
+            <div><span>Approx. 2 km</span><strong>Nuwara Eliya town</strong><small>Cafés, markets and the heart of town.</small></div>
+            <div><span>Approx. 3 km</span><strong>Gregory Lake</strong><small>Waterside walks, boating and cool evenings.</small></div>
+            <div><span>Approx. 5 km</span><strong>Tea country</strong><small>Green estates, factory visits and hill views.</small></div>
+            <div><span>Approx. 8 km</span><strong>Hakgala Botanical Garden</strong><small>Highland gardens and seasonal colour.</small></div>
+            <div><span>Approx. 30 km</span><strong>Horton Plains</strong><small>An early-start day trip for World’s End and the plateau.</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="discover-nuwara section-pad" aria-labelledby="discover-title">
+      <div class="container">
+        <div class="discover-head reveal">
+          <p class="kicker dark">Beyond the hotel</p>
+          <h2 id="discover-title">A few ways to spend<br><em>a hill-country day.</em></h2>
+        </div>
+        <div class="experience-cards">
+          <article class="experience-card reveal"><span>01</span><div><p class="experience-time">Morning</p><h3>Tea-country roads</h3><p>Head out into the green slopes, stop for a tea experience, and take the slower road back to town.</p></div></article>
+          <article class="experience-card reveal delay-1"><span>02</span><div><p class="experience-time">Afternoon</p><h3>Gregory Lake</h3><p>Walk by the water, enjoy the open air, and stay for the softer light before evening.</p></div></article>
+          <article class="experience-card reveal delay-2"><span>03</span><div><p class="experience-time">Day trip</p><h3>Highland wilderness</h3><p>Plan an early start for Horton Plains, then return to a warm shower and a quiet night at Mount Edge.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews section-pad" aria-labelledby="reviews-title">
+      <div class="container reviews-grid">
+        <div class="reveal">
+          <p class="kicker">Guest reviews</p>
+          <h2 id="reviews-title">Real stays deserve<br><em>real words.</em></h2>
+        </div>
+        <div class="review-integrity reveal delay-1">
+          <span class="review-mark">“</span>
+          <p>Guest feedback is being verified before publication. We only display comments that can be attributed to genuine stays, so this space will grow with real guest stories.</p>
+          <div class="review-actions"><a href="https://wa.me/94777659300?text=Hello%20Mount%20Edge%20Hotel%2C%20I%20recently%20stayed%20with%20you%20and%20would%20like%20to%20share%20feedback." target="_blank" rel="noopener">Stayed with us? Share feedback ↗</a><span>Verified reviews only</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="direct-benefits" aria-label="Benefits of booking direct">
+      <div class="container benefits-grid">
+        <div><span>01</span><strong>Direct hotel contact</strong><p>Speak with the property team instead of a third party.</p></div>
+        <div><span>02</span><strong>Quick availability check</strong><p>Send your dates and room preference in one message.</p></div>
+        <div><span>03</span><strong>Meal-plan flexibility</strong><p>Ask about room only, half board or full board before confirming.</p></div>
       </div>
     </section>
 
@@ -150,13 +208,20 @@
     </section>
   </main>
 
-  <footer>
-    <div class="container footer-grid">
-      <div class="footer-brand"><img src="assets/logo.png" alt="Mount Edge Hotel"><p>A quiet hill-country stay in Nuwara Eliya.</p></div>
-      <div><span class="footer-label">Navigate</span><a href="#rooms">Rooms</a><a href="#experience">Experience</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a></div>
-      <div><span class="footer-label">Contact</span><a href="tel:+94777659300">Call us</a><a href="mailto:mountedgehotel.lk@gmail.com">Email us</a><a href="https://wa.me/94777659300" target="_blank" rel="noopener">WhatsApp</a></div>
+  <footer class="cinematic-footer">
+    <div class="footer-photo" aria-hidden="true"></div>
+    <div class="footer-shade" aria-hidden="true"></div>
+    <div class="container footer-content">
+      <div class="footer-callout"><p class="kicker">Come up to the hills</p><h2>Make Nuwara Eliya<br><em>your next pause.</em></h2><button class="btn btn-gold js-book" type="button">Plan your stay ↗</button></div>
+      <div class="footer-grid">
+        <div class="footer-brand"><img src="assets/logo.png" alt="Mount Edge Hotel"><p>A quiet hill-country stay in Nuwara Eliya.</p></div>
+        <div><span class="footer-label">Explore</span><a href="#rooms">Rooms</a><a href="#experience">Experience</a><a href="#location">Location</a><a href="gallery.html">Gallery</a></div>
+        <div><span class="footer-label">Contact</span><a href="tel:+94777659300">+94 77 765 9300</a><a href="mailto:mountedgehotel.lk@gmail.com">Email the hotel</a><a href="https://wa.me/94777659300" target="_blank" rel="noopener">WhatsApp</a></div>
+        <div><span class="footer-label">Find us</span><p>No.73, Dharmapalapura<br>Blackpool, Nuwara Eliya<br>Sri Lanka</p><a href="https://www.google.com/maps/search/?api=1&query=No.73%20Dharmapalapura%20Blackpool%20Nuwara%20Eliya%20Sri%20Lanka" target="_blank" rel="noopener">Get directions ↗</a></div>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true">MOUNT EDGE</div>
+      <div class="footer-bottom"><span>© <span id="year"></span> Mount Edge Hotel</span><span>Nuwara Eliya · Sri Lanka</span></div>
     </div>
-    <div class="container footer-bottom"><span>© <span id="year"></span> Mount Edge Hotel</span><span>Nuwara Eliya · Sri Lanka</span></div>
   </footer>
 
   <div class="modal" id="bookingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
@@ -169,7 +234,7 @@
       <form id="bookingForm" class="booking-form">
         <label>Check-in<input id="checkin" type="date" required></label>
         <label>Check-out<input id="checkout" type="date" required></label>
-        <label>Room type<select id="roomtype"><option value="Any room">Any room</option><option>Single room</option><option>Double room</option><option>Triple room</option><option>Timber loft room</option></select></label>
+        <label>Room type<select id="roomtype"><option value="Any room">Any room</option><option>Single room</option><option>Double room</option><option>Triple room</option></select></label>
         <label>Guests<select id="guests"><option>1 guest</option><option selected>2 guests</option><option>3 guests</option><option>4 guests</option><option>5+ guests</option></select></label>
         <button class="btn btn-gold form-submit" type="submit">Continue on WhatsApp ↗</button>
         <p class="form-error" id="formError" role="alert"></p>
@@ -177,7 +242,7 @@
     </div>
   </div>
 
-  <a class="whatsapp-fab" href="https://wa.me/94777659300?text=Hello%20Mount%20Edge%20Hotel%2C%20I%20would%20like%20to%20make%20a%20booking%20enquiry." target="_blank" rel="noopener" aria-label="Chat with Mount Edge Hotel on WhatsApp">WA</a>
+  <div class="floating-actions" aria-label="Quick booking actions"><a class="floating-wa" href="https://wa.me/94777659300?text=Hello%20Mount%20Edge%20Hotel%2C%20I%20would%20like%20to%20make%20a%20booking%20enquiry." target="_blank" rel="noopener" aria-label="Chat with Mount Edge Hotel on WhatsApp"><span class="wa-dot" aria-hidden="true"></span>WhatsApp</a><button class="floating-book js-book" type="button">Book</button></div>
   <script src="main.js" defer></script>
 </body>
 </html>
