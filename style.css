@@ -64,3 +64,10 @@
 /* Ryvora Labs project credit */
 .ryvora-credit a{color:rgba(224,189,112,.82);transition:color .25s ease}.ryvora-credit a:hover,.ryvora-credit a:focus-visible{color:var(--gold2);outline:none}.cinematic-footer .footer-bottom{align-items:center;gap:1rem;flex-wrap:wrap}.ryvora-credit{margin-left:auto;text-align:right}
 @media(max-width:760px){.ryvora-credit{margin-left:0;text-align:left}.cinematic-footer .footer-bottom{align-items:flex-start}}
+
+/* Keep the floating booking controls from covering footer credits or content */
+.floating-actions{transition:opacity .28s ease,transform .28s ease,visibility .28s ease}
+body.footer-in-view .floating-actions{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(18px)}
+@media(max-width:760px){
+  body.footer-in-view{padding-bottom:0}
+}

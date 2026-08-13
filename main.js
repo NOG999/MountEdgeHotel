@@ -21,3 +21,12 @@ $$('[data-lightbox]').forEach(item=>{const open=()=>{
 }; item.addEventListener('click',open); item.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}})});
 function closeLightbox(){if(!lightbox)return;lightbox.classList.remove('open');lightbox.setAttribute('aria-hidden','true');document.body.classList.remove('no-scroll')}
 $$('[data-close-lightbox]').forEach(el=>el.addEventListener('click',closeLightbox));
+
+// Hide floating booking actions while the footer is visible so footer links and credits remain unobstructed.
+const siteFooter=document.querySelector('footer');
+if(siteFooter&&'IntersectionObserver' in window){
+  const footerObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>document.body.classList.toggle('footer-in-view',entry.isIntersecting));
+  },{threshold:0.03});
+  footerObserver.observe(siteFooter);
+}
