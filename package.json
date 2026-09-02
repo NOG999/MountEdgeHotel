@@ -1,0 +1,27 @@
+{
+  "name": "mount-edge-hotel",
+  "version": "1.0.0",
+  "description": "Mount Edge Hotel website - A peaceful hill-country stay in Nuwara Eliya, Sri Lanka",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NOG999/MountEdgeHotel.git"
+  },
+  "keywords": [
+    "hotel",
+    "nuwara-eliya",
+    "sri-lanka"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NOG999/MountEdgeHotel/issues"
+  },
+  "homepage": "https://github.com/NOG999/MountEdgeHotel#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
