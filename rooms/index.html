@@ -1,146 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/x-icon" href="../favicon.png" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rooms | Mount Edge Hotel</title>
-  <link rel="stylesheet" href="../style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07150f">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.google.com; connect-src 'self' https://formspree.io; form-action https://formspree.io; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Single, double and triple rooms at Mount Edge Hotel, Blackpool, Nuwara Eliya. Rates from Rs. 12,000 with room only, half board and full board options.">
+  <title>Rooms &amp; Rates | Mount Edge Hotel, Nuwara Eliya</title>
+  <link rel="canonical" href="https://mountedgehotel.com/rooms/">
+  <meta property="og:type" content="website"><meta property="og:site_name" content="Mount Edge Hotel"><meta property="og:title" content="Rooms &amp; Rates | Mount Edge Hotel, Nuwara Eliya"><meta property="og:description" content="Single, double and triple rooms at Mount Edge Hotel, Blackpool, Nuwara Eliya. Rates from Rs. 12,000 with room only, half board and full board options."><meta property="og:url" content="https://mountedgehotel.com/rooms/"><meta property="og:image" content="https://mountedgehotel.com/assets/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="en_GB">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Rooms &amp; Rates | Mount Edge Hotel, Nuwara Eliya"><meta name="twitter:description" content="Single, double and triple rooms at Mount Edge Hotel, Blackpool, Nuwara Eliya. Rates from Rs. 12,000 with room only, half board and full board options."><meta name="twitter:image" content="https://mountedgehotel.com/assets/og-image.jpg">
+  <link rel="icon" href="../assets/favicon.png" type="image/png"><link rel="apple-touch-icon" href="../assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mountedgehotel.com/"}, {"@type": "ListItem", "position": 2, "name": "Rooms & Rates", "item": "https://mountedgehotel.com/rooms/"}]}</script>
 </head>
 <body>
-
-<nav>
-  <a href="../" class="nav-logo">
-   <img src="../Logo.png" alt="Mount Edge Hotel" style="height:50px; width:auto;" loading="eager" fetchpriority="high" />
-  </a>
-  <ul class="nav-links">
-    <li><a href="../">Home</a></li>
-    <li><a href="../rooms/" class="active">Rooms</a></li>
-    <li><a href="../facilities/">Facilities</a></li>
-    <li><a href="../gallery/">Gallery</a></li>
-    <li><a href="../about/">About</a></li>
-    <li><a href="../contact/">Contact</a></li>
-    <li><a href="../booking/" class="nav-book">Book Now</a></li>
-  </ul>
-  <button class="hamburger"><span></span><span></span><span></span></button>
-</nav>
-<div class="mobile-menu"><button class="mobile-close">×</button><ul class="nav-links"><li><a href="../">Home</a></li><li><a href="../rooms/">Rooms</a></li><li><a href="../facilities/">Facilities</a></li><li><a href="../gallery/">Gallery</a></li><li><a href="../about/">About</a></li><li><a href="../contact/">Contact</a></li><li><a href="../booking/">Book Now</a></li></ul></div>
-
-<div class="page-hero" style="background-image: linear-gradient(135deg,#1a2e1a,#2d4a2d);">
-  <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1400&q=80') center/cover;opacity:0.25;"></div>
-  <div class="page-hero-content">
-    <div class="breadcrumb"><a href="../">Home</a><span>/</span> Rooms</div>
-    <h1>Our Rooms</h1>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" id="progress"></div>
+  <header class="site-header subpage-header" id="siteHeader">
+    <a class="brand" href="../" aria-label="Mount Edge Hotel home"><img src="../assets/logo.png" width="640" height="427" alt="Mount Edge Hotel"></a>
+    <nav class="desktop-nav" aria-label="Primary navigation"><a href="../">Home</a><a href="../rooms/" class="active" aria-current="page">Rooms</a><a href="../facilities/">Facilities</a><a href="../gallery.html">Gallery</a><a href="../about/">About</a><a href="../contact/">Contact</a></nav>
+    <button class="book-btn js-book" type="button">Book your stay</button>
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav aria-label="Mobile navigation"><a href="../">Home</a><a href="../rooms/">Rooms</a><a href="../facilities/">Facilities</a><a href="../gallery.html">Gallery</a><a href="../about/">About</a><a href="../contact/">Contact</a><a href="../booking/">Book online</a><button class="btn btn-gold js-book" type="button">Check availability</button></nav>
+    <p>Nuwara Eliya · Sri Lanka</p>
   </div>
-</div>
 
-<!-- SINGLE ROOM -->
-<section style="background: var(--cream);">
-  <div class="welcome-split container">
-    <div class="welcome-img-wrap">
-      <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80" alt="Single Room" loading="lazy" />
+  <main id="main">
+    <section class="page-head"><div class="container"><p class="kicker">Rooms &amp; rates</p><h1>Comfort with <em>character.</em></h1><p>Simple, warm rooms for solo travellers, couples and families — with room only, half board and full board plans.</p></div></section>
+<section class="section-pad light"><div class="container"><article class="room-row"><div class="room-pic"></div><div class="room-info"><span class="num">01</span><h2>Single Room</h2><p class="who">For solo travellers</p><ul class="feature-chips"><li>Free Wi-Fi</li><li>Hot shower</li><li>Mountain view</li><li>Natural light</li><li>Toiletries</li><li>Tea / coffee</li></ul><table class="rates"><caption class="sr">Single Room rates per night in Sri Lankan rupees</caption><tr><th scope="row">Room only</th><td>Rs. 12,000</td></tr><tr><th scope="row">Half board</th><td>Rs. 15,000</td></tr><tr><th scope="row">Full board</th><td>Rs. 18,000</td></tr></table><a class="btn btn-gold" href="../booking/?room=Single">Book single room ↗</a></div></article><article class="room-row flip"><div class="room-pic"><img src="../assets/double-room.webp" alt="Double room with exposed brick feature wall" loading="lazy" width="1200" height="903"></div><div class="room-info"><span class="num">02</span><h2>Double Room</h2><p class="who">For couples</p><ul class="feature-chips"><li>Free Wi-Fi</li><li>En-suite bathroom</li><li>Tea-country view</li><li>Hot water</li><li>Seating area</li><li>Tea / coffee</li></ul><table class="rates"><caption class="sr">Double Room rates per night in Sri Lankan rupees</caption><tr><th scope="row">Room only</th><td>Rs. 15,500</td></tr><tr><th scope="row">Half board</th><td>Rs. 18,500</td></tr><tr><th scope="row">Full board</th><td>Rs. 24,500</td></tr></table><a class="btn btn-gold" href="../booking/?room=Double">Book double room ↗</a></div></article><article class="room-row"><div class="room-pic"></div><div class="room-info"><span class="num">03</span><h2>Triple Room</h2><p class="who">For families &amp; small groups</p><ul class="feature-chips"><li>Free Wi-Fi</li><li>En-suite bathroom</li><li>Garden access</li><li>Family friendly</li><li>Hot water</li><li>Tea / coffee</li></ul><table class="rates"><caption class="sr">Triple Room rates per night in Sri Lankan rupees</caption><tr><th scope="row">Room only</th><td>Rs. 18,000</td></tr><tr><th scope="row">Half board</th><td>Rs. 22,500</td></tr><tr><th scope="row">Full board</th><td>Rs. 26,500</td></tr></table><a class="btn btn-gold" href="../booking/?room=Triple">Book triple room ↗</a></div></article><p class="note">Rates are per room, per night, in Sri Lankan rupees. Taxes may apply. We also have a signature Timber Loft Room beneath a pitched timber ceiling — ask us about availability.</p></div></section>
+  </main>
+
+  <footer class="cinematic-footer gallery-footer">
+    <div class="footer-photo" aria-hidden="true"></div><div class="footer-shade" aria-hidden="true"></div>
+    <div class="container footer-content">
+      <div class="footer-grid">
+        <div class="footer-brand"><img src="../assets/logo.png" width="640" height="427" alt="Mount Edge Hotel" loading="lazy"><p>A quiet hill-country stay in Nuwara Eliya.</p></div>
+        <div><span class="footer-label">Explore</span><a href="../rooms/">Rooms</a><a href="../facilities/">Facilities</a><a href="../gallery.html">Gallery</a><a href="../about/">About</a><a href="../contact/">Contact</a><a href="../booking/">Book online</a><a href="../terms/">Terms &amp; privacy</a></div>
+        <div><span class="footer-label">Contact</span><a href="tel:+94777659300">+94 77 765 9300</a><a href="mailto:mountedgehotel.lk@gmail.com">Email the hotel</a><a href="https://wa.me/94777659300" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+        <div><span class="footer-label">Find us</span><p>No.73, Dharmapalapura<br>Blackpool, Nuwara Eliya<br>Sri Lanka</p><a href="https://www.google.com/maps/search/?api=1&amp;query=No.73%20Dharmapalapura%20Blackpool%20Nuwara%20Eliya%20Sri%20Lanka" target="_blank" rel="noopener noreferrer">Get directions ↗</a></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> Mount Edge Hotel</span><span>Nuwara Eliya · Sri Lanka</span><span class="ryvora-credit">A digital experience by <a href="https://ryvora.space" target="_blank" rel="noopener noreferrer">Ryvora Labs ↗</a></span></div>
     </div>
-    <div>
-      <span class="section-label">Room Type 01</span>
-      <h2 class="section-title">Single <em>Room</em></h2>
-      <div class="section-line"></div>
-      <p>Our Single Rooms are thoughtfully designed for the solo traveler seeking a quiet, comfortable escape in the hills. Each room offers a cozy private space with all the essentials you need for a relaxing stay.</p>
-      <div class="room-amenities" style="margin-top:1.5rem;">
-        <span class="amenity-tag">📶 Free Wi-Fi</span>
-        <span class="amenity-tag">🚿 Hot Shower</span>
-        <span class="amenity-tag">⛰️ Mountain View</span>
-        <span class="amenity-tag">🪟 Natural Light</span>
-        <span class="amenity-tag">🧼 Toiletries</span>
-        <span class="amenity-tag">☕ Tea/Coffee</span>
-      </div>
-      <div class="pricing-grid" style="margin-top:2rem; max-width:100%;">
-        <div class="pricing-card" style="border-color:rgba(0,0,0,0.1); background:var(--white);">
-          <div class="price-row" style="border-color:rgba(0,0,0,0.06);"><span style="color:var(--text-light);">Room Only</span><span style="color:var(--green);">Rs. 12,000</span></div>
-          <div class="price-row" style="border-color:rgba(0,0,0,0.06);"><span style="color:var(--text-light);">Half Board</span><span style="color:var(--green);">Rs. 15,000</span></div>
-          <div class="price-row" style="border-bottom:none;"><span style="color:var(--text-light);">Full Board</span><span style="color:var(--green);">Rs. 18,000</span></div>
-        </div>
-      </div>
-      <div style="margin-top:2rem;"><a href="../booking/?type=Single" class="btn btn-gold">Book Single Room</a></div>
+  </footer>
+
+  <div class="modal" id="bookingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel" role="document">
+      <button class="modal-close" type="button" data-close-modal aria-label="Close booking enquiry">×</button>
+      <p class="kicker dark">Direct enquiry</p>
+      <h2 id="bookingTitle">Check your stay</h2>
+      <p class="modal-intro">Complete the details below. We will open WhatsApp with your enquiry ready to send.</p>
+      <form id="bookingForm" class="booking-form">
+        <label>Check-in<input id="checkin" type="date" required></label>
+        <label>Check-out<input id="checkout" type="date" required></label>
+        <label>Room type<select id="roomtype"><option value="Any room">Any room</option><option>Single room</option><option>Double room</option><option>Triple room</option></select></label>
+        <label>Guests<select id="guests"><option>1 guest</option><option selected>2 guests</option><option>3 guests</option><option>4 guests</option><option>5+ guests</option></select></label>
+        <button class="btn btn-gold form-submit" type="submit">Continue on WhatsApp ↗</button>
+        <p class="form-error" id="formError" role="alert"></p>
+      </form>
     </div>
   </div>
-</section>
 
-<!-- DOUBLE ROOM -->
-<section style="background: var(--mist);">
-  <div class="welcome-split container" style="direction:rtl;">
-    <div class="welcome-img-wrap" style="direction:ltr;">
-      <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80" alt="Double Room" loading="lazy" />
-      <div class="welcome-badge" style="background:var(--green);">
-        <span class="big">★</span>
-        <span class="small">Most Popular</span>
-      </div>
-    </div>
-    <div style="direction:ltr;">
-      <span class="section-label">Room Type 02</span>
-      <h2 class="section-title">Double <em>Room</em></h2>
-      <div class="section-line"></div>
-      <p>Perfect for couples, our Double Rooms offer a romantic retreat with stunning views of the surrounding tea plantations and misty mountains. Spacious and elegantly furnished for a memorable stay.</p>
-      <div class="room-amenities" style="margin-top:1.5rem;">
-        <span class="amenity-tag">📶 Free Wi-Fi</span>
-        <span class="amenity-tag">🛁 En-Suite Bathroom</span>
-        <span class="amenity-tag">🍃 Tea Plantation View</span>
-        <span class="amenity-tag">🌡️ Hot Water</span>
-        <span class="amenity-tag">🪑 Seating Area</span>
-        <span class="amenity-tag">☕ Tea/Coffee</span>
-      </div>
-      <div class="pricing-grid" style="margin-top:2rem; max-width:100%;">
-        <div class="pricing-card" style="border-color:rgba(0,0,0,0.1); background:var(--white);">
-          <div class="price-row" style="border-color:rgba(0,0,0,0.06);"><span style="color:var(--text-light);">Room Only</span><span style="color:var(--green);">Rs. 15,500</span></div>
-          <div class="price-row" style="border-color:rgba(0,0,0,0.06);"><span style="color:var(--text-light);">Half Board</span><span style="color:var(--green);">Rs. 18,500</span></div>
-          <div class="price-row" style="border-bottom:none;"><span style="color:var(--text-light);">Full Board</span><span style="color:var(--green);">Rs. 24,500</span></div>
-        </div>
-      </div>
-      <div style="margin-top:2rem;"><a href="../booking/?type=Double" class="btn btn-gold">Book Double Room</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- TRIPLE ROOM -->
-<section style="background: var(--cream);">
-  <div class="welcome-split container">
-    <div class="welcome-img-wrap">
-      <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=800&q=80" alt="Triple Room" loading="lazy" />
-    </div>
-    <div>
-      <span class="section-label">Room Type 03</span>
-      <h2 class="section-title">Triple <em>Room</em></h2>
-      <div class="section-line"></div>
-      <p>Ideal for families and small groups, our Triple Rooms offer extra space and comfort. With easy access to our beautiful garden, children can enjoy the outdoors while parents relax in the hill country breeze.</p>
-      <div class="room-amenities" style="margin-top:1.5rem;">
-        <span class="amenity-tag">📶 Free Wi-Fi</span>
-        <span class="amenity-tag">🛁 En-Suite Bathroom</span>
-        <span class="amenity-tag">🌳 Garden Access</span>
-        <span class="amenity-tag">👪 Family Friendly</span>
-        <span class="amenity-tag">🌡️ Hot Water</span>
-        <span class="amenity-tag">☕ Tea/Coffee</span>
-      </div>
-      <div class="pricing-grid" style="margin-top:2rem; max-width:100%;">
-        <div class="pricing-card" style="border-color:rgba(0,0,0,0.1); background:var(--white);">
-          <div class="price-row" style="border-color:rgba(0,0,0,0.06);"><span style="color:var(--text-light);">Room Only</span><span style="color:var(--green);">Rs. 18,000</span></div>
-          <div class="price-row" style="border-color:rgba(0,0,0,0.06);"><span style="color:var(--text-light);">Half Board</span><span style="color:var(--green);">Rs. 22,500</span></div>
-          <div class="price-row" style="border-bottom:none;"><span style="color:var(--text-light);">Full Board</span><span style="color:var(--green);">Rs. 26,500</span></div>
-        </div>
-      </div>
-      <div style="margin-top:2rem;"><a href="../booking/?type=Triple" class="btn btn-gold">Book Triple Room</a></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand"><h3>Mount Edge Hotel</h3><p>Your peaceful retreat in the beautiful hills of Nuwara Eliya.</p></div>
-    <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="../">Home</a></li><li><a href="../rooms/">Rooms</a></li><li><a href="../booking/">Book Now</a></li><li><a href="../contact/">Contact</a></li></ul></div>
-    <div class="footer-col"><h4>Legal</h4><ul><li><a href="../terms/">Terms &amp; Conditions</a></li><li><a href="../terms/#cancellation">Cancellation Policy</a></li></ul></div>
-    <div class="footer-col footer-contact"><h4>Contact Us</h4><p>📍 No.73, Dharmapalapura, Blackpool, Nuwara Eliya</p><p>📞 <a href="tel:+94777659300">+94 77 765 9300</a></p><p>✉ <a href="mailto:mountedgehotel.lk@gmail.com">mountedgehotel.lk@gmail.com</a></p></div>
-  </div>
-  <div class="footer-bottom"><span>© 2026 Mount Edge Hotel. All rights reserved.</span></div>
-</footer>
-<button class="scroll-top">↑</button>
-<script src="../main.js"></script>
+  <div class="floating-actions" aria-label="Quick booking actions"><a class="floating-wa" href="https://wa.me/94777659300?text=Hello%20Mount%20Edge%20Hotel%2C%20I%20would%20like%20to%20make%20a%20booking%20enquiry." target="_blank" rel="noopener" aria-label="Chat with Mount Edge Hotel on WhatsApp"><span class="wa-dot" aria-hidden="true"></span>WhatsApp</a><button class="floating-book js-book" type="button">Book</button></div>
+  <script src="../main.js" defer></script>
 </body>
 </html>
