@@ -36,7 +36,7 @@
 
 ## Please confirm before launch (I did not invent these)
 
-1. **Rates.** Home page lists room-only rates; subpages list all meal plans (taken from your old Rooms page).
+1. **Rates (updated Oct 2026).** Room only / B&B / half board, per your price sheet. Full board has been removed everywhere. The home page shows room-only rates; the Rooms page and booking estimate show all three plans.
 2. **Facilities** (airport transfers, laundry, extra beds, luggage storage) came from your old Facilities page — delete any you don't offer.
 3. **Logo** has dark text on a dark header. A white/gold version would look much better.
 4. **Formspree** form `xpqkbzkg` is reused for both contact and booking; subject lines distinguish them.

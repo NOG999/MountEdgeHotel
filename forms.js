@@ -1,7 +1,7 @@
 (()=>{
 const $=(s,c=document)=>c.querySelector(s);
-const RATES={Single:[12000,15000,18000],Double:[15500,18500,24500],Triple:[18000,22500,26500]};
-const MEALS=['Room only','Half board','Full board'];
+const RATES={Single:[8000,12500,15000],Double:[12000,15000,17500],Triple:[15000,17500,22000]};
+const MEALS=['Room only','B&B','Half board'];
 const fmt=n=>'Rs. '+n.toLocaleString('en-US');
 const room=$('#bRoom'),meal=$('#bMeal'),ci=$('#bCheckin'),co=$('#bCheckout');
 function summary(){
